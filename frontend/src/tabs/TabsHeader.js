@@ -18,7 +18,7 @@ const tabsHeader = (props) => {
 
     return (
         <React.Fragment>
-            <AppBar position="static" color="default">
+            <AppBar position="sticky" color="default">
                 <Tabs
                     value={props.value}
                     onChange={handleChange}

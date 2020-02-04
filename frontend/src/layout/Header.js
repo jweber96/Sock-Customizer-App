@@ -7,7 +7,7 @@ import "typeface-roboto";
 const header = (props) => {
     return (
         <React.Fragment>
-            <AppBar position="sticky">
+            <AppBar position="static">
                 <Toolbar>
                     <h1>Sock Customerizer</h1>
                 </Toolbar>

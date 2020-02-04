@@ -1,4 +1,4 @@
-import { INPUT_LOGO, RESET_LOGO } from "../actions/LogoActions";
+import { INPUT_LOGO, RESET_LOGO } from "./LogoActions";
 
 const initialState = () => {
     return {

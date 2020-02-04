@@ -1,4 +1,4 @@
-import { CLICK_TAB } from "../actions/TabActions";
+import { CLICK_TAB } from "./TabsActions";
 
 const initialState = () => {
     return {
@@ -6,7 +6,7 @@ const initialState = () => {
     };
 };
 
-const tabReducer = (state = initialState(), action) => {
+const tabsReducer = (state = initialState(), action) => {
     switch (action.type) {
         case CLICK_TAB:
             return {
@@ -17,4 +17,4 @@ const tabReducer = (state = initialState(), action) => {
     }
 }
 
-export default tabReducer;
+export default tabsReducer;

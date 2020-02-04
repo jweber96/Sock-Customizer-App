@@ -1,30 +1,29 @@
 import React from "react"
 import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
-import 'typeface-roboto';
+import "typeface-roboto";
 
-
-const details = () => {
+const design = () => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-                <h1>Details</h1>
-                {/* TODO: Implement the detail tab... */}
+                <h1>Design</h1>
+                {/* TODO: Implement the design tab... */}
             </Grid>
         </React.Fragment>
     );
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
         // Nothing to map yet...
     };
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
         // Nothing to map yet...
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(details)
+export default connect(mapStateToProps, mapDispatchToProps)(design)

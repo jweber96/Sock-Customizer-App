@@ -1,4 +1,4 @@
-import { INPUT_TEXT, RESET_TEXT } from "../actions/TextActions";
+import { INPUT_TEXT, RESET_TEXT } from "./TextActions";
 
 const initialState = () => {
     return {

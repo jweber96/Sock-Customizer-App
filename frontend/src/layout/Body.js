@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux";
-import TabHeader from "./TabHeader";
-import 'typeface-roboto';
+import TabHeader from "../tabs/TabsHeader";
+import "typeface-roboto";
 
 
 const body = () => {

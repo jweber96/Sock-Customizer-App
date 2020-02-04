@@ -1,14 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import TextReducer from "./reducers/TextReducer";
-import LogoReducer from "./reducers/LogoReducer";
-import tabReducer from "./reducers/TabReducer";
+import TextReducer from "./text/TextReducer";
+import LogoReducer from "./logo/LogoReducer";
+import tabsReducer from "./tabs/TabsReducer";
 
 const reducers = () => {
     return combineReducers({
         textState: TextReducer,
         logoState: LogoReducer,
-        tabState: tabReducer
+        tabsState: tabsReducer
     });
 }
 

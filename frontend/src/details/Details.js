@@ -1,15 +1,15 @@
 import React from "react"
 import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
-import 'typeface-roboto';
+import "typeface-roboto";
 
 
-const colors = () => {
+const details = () => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-                <h1>Colors</h1>
-                {/* TODO: Implement the color tab... */}
+                <h1>Details</h1>
+                {/* TODO: Implement the detail tab... */}
             </Grid>
         </React.Fragment>
     );
@@ -27,4 +27,4 @@ const mapDispatchToProps = () => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(colors)
+export default connect(mapStateToProps, mapDispatchToProps)(details)

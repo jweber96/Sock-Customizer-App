@@ -1,17 +1,17 @@
 import React from "react"
 import { connect } from "react-redux";
 import { AppBar, Tab, Tabs } from "@material-ui/core";
-import { clickTab } from "../actions/TabActions";
-import TabBody from "./TabBody";
-import Design from "./Design"
-import Colors from "./Colors"
-import Text from "./Text"
-import Logo from "./Logo"
-import Details from "./Details"
-import 'typeface-roboto';
+import { clickTab } from "./TabsActions";
+import TabBody from "./TabsBody";
+import Design from "../design/Design"
+import Colors from "../colors/Colors"
+import Text from "../text/Text"
+import Logo from "../logo/Logo"
+import Details from "../details/Details"
+import "typeface-roboto";
 
 
-const tabHeader = (props) => {
+const tabsHeader = (props) => {
     const handleChange = (event, value) => {
         props.clickTab(value);
     }
@@ -54,7 +54,7 @@ const tabHeader = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        value: state.tabState.value
+        value: state.tabsState.value
     };
 }
 
@@ -64,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(tabHeader)
+export default connect(mapStateToProps, mapDispatchToProps)(tabsHeader)

@@ -1,10 +1,10 @@
 import React from "react"
 import { connect } from "react-redux";
 import { Box } from "@material-ui/core";
-import 'typeface-roboto';
+import "typeface-roboto";
 
 
-const tabBody = (props) => {
+const tabsBody = (props) => {
     return (
         <React.Fragment>
             {
@@ -20,7 +20,7 @@ const mapStateToProps = (state, props) => {
     return {
         index: props.index,
         children: props.children,
-        value: state.tabState.value
+        value: state.tabsState.value
     };
 }
 
@@ -30,4 +30,4 @@ const mapDispatchToProps = () => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(tabBody)
+export default connect(mapStateToProps, mapDispatchToProps)(tabsBody)

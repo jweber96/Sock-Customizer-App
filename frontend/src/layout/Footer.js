@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import 'typeface-roboto';
+import "typeface-roboto";
 
 
 const footer = () => {

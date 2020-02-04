@@ -2,8 +2,8 @@ import React from "react"
 import { Grid, IconButton, TextField } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { connect } from "react-redux";
-import { inputText, resetText } from "../actions/TextActions";
-import 'typeface-roboto';
+import { inputText, resetText } from "./TextActions";
+import "typeface-roboto";
 
 const text = (props) => {
     const handleInput = (event) => {

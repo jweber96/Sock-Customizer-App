@@ -2,8 +2,8 @@ import React from "react"
 import { IconButton, Grid } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { connect } from "react-redux";
-import { inputLogo, resetLogo } from "../actions/LogoActions";
-import 'typeface-roboto';
+import { inputLogo, resetLogo } from "./LogoActions";
+import "typeface-roboto";
 
 const logo = (props) => {
     const handleInput = (event) => {

@@ -15,7 +15,9 @@ const colors = (props) => {
                         Object.keys(props.colors).map((color, index) => (
                             <GridListTile key={index}>
                                 <svg width="32" height="32">
-                                    <circle cx="16" cy="16" r="16" fill={props.colors[color]} />
+                                    <circle cx="16" cy="16" r="16" fill={props.colors[color]}>
+                                        <title>{color}</title>
+                                    </circle>
                                 </svg>
                             </GridListTile>
                         ))

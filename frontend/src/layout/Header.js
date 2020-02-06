@@ -9,7 +9,7 @@ const header = (props) => {
         <React.Fragment>
             <AppBar position="static">
                 <Toolbar>
-                    <h1>Sock Customerizer</h1>
+                    <h1>Sock Customizer</h1>
                 </Toolbar>
             </AppBar>
         </React.Fragment>

@@ -43,7 +43,7 @@ const logo = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        logo: state.logoState.logo
+        logo: state.logo.logo
     };
 }
 

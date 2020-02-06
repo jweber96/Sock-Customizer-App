@@ -1,50 +1,39 @@
-import { INPUT_TOE_FIRST_LINE_TEXT, INPUT_TOE_SECOND_LINE_TEXT, INPUT_BRIM_FIRST_LINE_TEXT, INPUT_BRIM_SECOND_LINE_TEXT, RESET_TEXT } from "./TextActions";
+import { INPUT_TOE_PRIMARY_TEXT, INPUT_TOE_SECONDARY_TEXT, INPUT_BRIM_PRIMARY_TEXT, INPUT_BRIM_SECONDARY_TEXT, RESET_ALL_TEXT } from "./TextActions";
 
 const initialState = () => {
     return {
-        toeFirstLineText: "",
-        toeSecondLineText: "",
-        brimFirstLineText: "",
-        brimSecondLineText: ""
+        toePrimaryText: "",
+        toeSecondaryText: "",
+        brimPrimaryText: "",
+        brimSecondaryText: ""
     };
 };
 
 const textReducer = (state = initialState(), action) => {
     switch (action.type) {
-        case INPUT_TOE_FIRST_LINE_TEXT:
+        case INPUT_TOE_PRIMARY_TEXT:
             return {
-                toeFirstLineText: action.payload.text,
-                toeSecondLineText: state.toeSecondLineText,
-                brimFirstLineText: state.brimFirstLineText,
-                brimSecondLineText: state.brimSecondLineText
+                ...state,
+                toePrimaryText: action.payload.text
             };
-        case INPUT_TOE_SECOND_LINE_TEXT:
+        case INPUT_TOE_SECONDARY_TEXT:
             return {
-                toeFirstLineText: state.toeFirstLineText,
-                toeSecondLineText: action.payload.text,
-                brimFirstLineText: state.brimFirstLineText,
-                brimSecondLineText: state.brimSecondLineText
+                ...state,
+                toeSecondaryText: action.payload.text
             };
-        case INPUT_BRIM_FIRST_LINE_TEXT:
+        case INPUT_BRIM_PRIMARY_TEXT:
             return {
-                toeFirstLineText: state.toeFirstLineText,
-                toeSecondLineText: state.toeSecondLineText,
-                brimFirstLineText: action.payload.text,
-                brimSecondLineText: state.brimSecondLineText
+                ...state,
+                brimPrimaryText: action.payload.text
             };
-        case INPUT_BRIM_SECOND_LINE_TEXT:
+        case INPUT_BRIM_SECONDARY_TEXT:
             return {
-                toeFirstLineText: state.toeFirstLineText,
-                toeSecondLineText: state.toeSecondLineText,
-                brimFirstLineText: state.brimFirstLineText,
-                brimSecondLineText: action.payload.text
+                ...state,
+                brimSecondaryText: action.payload.text
             };
-        case RESET_TEXT:
+        case RESET_ALL_TEXT:
             return {
-                toeFirstLineText: action.payload.toeFirstLineText,
-                toeSecondLineText: action.payload.toeSecondLineText,
-                brimFirstLineText: action.payload.brimFirstLineText,
-                brimSecondLineText: action.payload.brimSecondLineText
+                ...action.payload
             };
         default:
             return state;

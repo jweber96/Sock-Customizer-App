@@ -54,7 +54,7 @@ const tabsHeader = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        value: state.tabsState.value
+        value: state.tabs.value
     };
 }
 

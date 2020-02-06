@@ -10,6 +10,7 @@ const tabsReducer = (state = initialState(), action) => {
     switch (action.type) {
         case CLICK_TAB:
             return {
+                ...state,
                 value: action.payload.value
             };
         default:

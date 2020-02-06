@@ -10,10 +10,12 @@ const logoReducer = (state = initialState(), action) => {
     switch (action.type) {
         case INPUT_LOGO:
             return {
+                ...state,
                 logo: action.payload.logo
             };
         case RESET_LOGO:
             return {
+                ...state,
                 logo: action.payload.logo
             };
         default:

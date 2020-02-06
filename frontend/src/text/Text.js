@@ -39,10 +39,10 @@ const text = (props) => {
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
             <h1>Text</h1>
-            <TextField label="Toe primary text!" variant="standard" value={props.toePrimaryText} onChange={handleToePrimaryText} />
-            <TextField label="Toe secondary text!" variant="standard" value={props.toeSecondaryText} onChange={handleToeSecondaryText} />
-            <TextField label="Brim first line text!" variant="standard" value={props.brimPrimaryText} onChange={handleBrimPrimaryText} />
-            <TextField label="Brim second line text!" variant="standard" value={props.brimSecondaryText} onChange={handleBrimSecondaryText} />
+            <TextField label="Toe Primary Text" variant="standard" value={props.toePrimaryText} onChange={handleToePrimaryText} />
+            <TextField label="Toe Secondary Text" variant="standard" value={props.toeSecondaryText} onChange={handleToeSecondaryText} />
+            <TextField label="Brim Primary Text" variant="standard" value={props.brimPrimaryText} onChange={handleBrimPrimaryText} />
+            <TextField label="Brim Secondary Text" variant="standard" value={props.brimSecondaryText} onChange={handleBrimSecondaryText} />
             {
                 !canShowDelete()
                 ? (

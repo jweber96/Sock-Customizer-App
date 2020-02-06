@@ -6,9 +6,9 @@ import tabsReducer from "./tabs/TabsReducer";
 
 const reducers = () => {
     return combineReducers({
-        textState: TextReducer,
-        logoState: LogoReducer,
-        tabsState: tabsReducer
+        text: TextReducer,
+        logo: LogoReducer,
+        tabs: tabsReducer
     });
 }
 

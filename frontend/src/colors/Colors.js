@@ -1,6 +1,7 @@
 import React from "react"
 import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
+import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
 
 
@@ -15,15 +16,18 @@ const colors = () => {
     );
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-        // Nothing to map yet...
+        primaryColor: state.colors.primaryColor,
+        secondaryColor: state.colors.secondaryColor,
+        colors: state.colors.colors
     };
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        // Nothing to map yet...
+        inputPrimaryColor: (color) => dispatch(pickPrimaryColor(color)),
+        inputSecondaryColor: (color) => dispatch(pickSecondaryColor(color))
     };
 }
 

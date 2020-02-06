@@ -1,9 +1,18 @@
-import { PICK_PRIMARY_COLOR, PICK_SECONDARY_COLOR } from "./ColorActions";
+import { PICK_PRIMARY_COLOR, PICK_SECONDARY_COLOR } from "./ColorsActions";
 
 const initialState = () => {
     return {
         primaryColor: "",
-        secondaryColor: ""
+        secondaryColor: "",
+        colors: { // Hard coded for now...
+            "red": "#FF0000",
+            "orange": "#FF7F00",
+            "yellow": "#FFFF00",
+            "green": "#00FF00",
+            "blue": "#0000FF",
+            "indigo": "#4B0082",
+            "violet": "#9400D3",
+        }
     };
 };
 

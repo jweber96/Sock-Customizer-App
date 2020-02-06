@@ -20,7 +20,7 @@ const mapStateToProps = (state, props) => {
     return {
         index: props.index,
         children: props.children,
-        value: state.tabsState.value
+        value: state.tabs.value
     };
 }
 

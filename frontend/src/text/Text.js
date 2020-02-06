@@ -2,24 +2,24 @@ import React from "react"
 import { Grid, IconButton, TextField } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { connect } from "react-redux";
-import { inputToeFirstLineText, inputToeSecondLineText, inputBrimFirstLineText, inputBrimSecondLineText, resetText } from "./TextActions";
+import { inputToePrimaryText, inputToeSecondaryText, inputBrimPrimaryText, inputBrimSecondaryText, resetAllText } from "./TextActions";
 import "typeface-roboto";
 
 const text = (props) => {
-    const handleToeFirstLineText = (event) => {
-        props.inputToeFirstLineText(event.target.value);
+    const handleToePrimaryText = (event) => {
+        props.inputToePrimaryText(event.target.value);
     }
 
-    const handleToeSecondLineText = (event) => {
-        props.inputToeSecondLineText(event.target.value);
+    const handleToeSecondaryText = (event) => {
+        props.inputToeSecondaryText(event.target.value);
     }
 
-    const handleBrimFirstLineText = (event) => {
-        props.inputBrimFirstLineText(event.target.value);
+    const handleBrimPrimaryText = (event) => {
+        props.inputBrimPrimaryText(event.target.value);
     }
 
-    const handleBrimSecondLineText = (event) => {
-        props.inputBrimSecondLineText(event.target.value);
+    const handleBrimSecondaryText = (event) => {
+        props.inputBrimSecondaryText(event.target.value);
     }
 
     const handleReset = () => {
@@ -28,10 +28,10 @@ const text = (props) => {
 
     const canShowDelete = () => {
         return (
-            props.toeFirstLineText.length > 0 ||
-            props.toeSecondLineText.length > 0 ||
-            props.brimFirstLineText.length > 0 ||
-            props.brimSecondLineText.length > 0
+            props.toePrimaryText.length > 0 ||
+            props.toeSecondaryText.length > 0 ||
+            props.brimPrimaryText.length > 0 ||
+            props.brimSecondaryText.length > 0
         );
     }
 
@@ -39,10 +39,10 @@ const text = (props) => {
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
             <h1>Text</h1>
-            <TextField label="Toe first line text!" variant="standard" value={props.toeFirstLineText} onChange={handleToeFirstLineText} />
-            <TextField label="Toe second line text!" variant="standard" value={props.toeSecondLineText} onChange={handleToeSecondLineText} />
-            <TextField label="Brim first line text!" variant="standard" value={props.brimFirstLineText} onChange={handleBrimFirstLineText} />
-            <TextField label="Brim second line text!" variant="standard" value={props.brimSecondLineText} onChange={handleBrimSecondLineText} />
+            <TextField label="Toe primary text!" variant="standard" value={props.toePrimaryText} onChange={handleToePrimaryText} />
+            <TextField label="Toe secondary text!" variant="standard" value={props.toeSecondaryText} onChange={handleToeSecondaryText} />
+            <TextField label="Brim first line text!" variant="standard" value={props.brimPrimaryText} onChange={handleBrimPrimaryText} />
+            <TextField label="Brim second line text!" variant="standard" value={props.brimSecondaryText} onChange={handleBrimSecondaryText} />
             {
                 !canShowDelete()
                 ? (
@@ -62,20 +62,20 @@ const text = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        toeFirstLineText: state.textState.toeFirstLineText,
-        toeSecondLineText: state.textState.toeSecondLineText,
-        brimFirstLineText: state.textState.brimFirstLineText,
-        brimSecondLineText: state.textState.brimSecondLineText
+        toePrimaryText: state.text.toePrimaryText,
+        toeSecondaryText: state.text.toeSecondaryText,
+        brimPrimaryText: state.text.brimPrimaryText,
+        brimSecondaryText: state.text.brimSecondaryText
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        inputToeFirstLineText: (text) => dispatch(inputToeFirstLineText(text)),
-        inputToeSecondLineText: (text) => dispatch(inputToeSecondLineText(text)),
-        inputBrimFirstLineText: (text) => dispatch(inputBrimFirstLineText(text)),
-        inputBrimSecondLineText: (text) => dispatch(inputBrimSecondLineText(text)),
-        resetText: () => dispatch(resetText())
+        inputToePrimaryText: (text) => dispatch(inputToePrimaryText(text)),
+        inputToeSecondaryText: (text) => dispatch(inputToeSecondaryText(text)),
+        inputBrimPrimaryText: (text) => dispatch(inputBrimPrimaryText(text)),
+        inputBrimSecondaryText: (text) => dispatch(inputBrimSecondaryText(text)),
+        resetText: () => dispatch(resetAllText())
     };
 }
 

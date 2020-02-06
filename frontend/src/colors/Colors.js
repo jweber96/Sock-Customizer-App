@@ -10,6 +10,7 @@ const colors = (props) => {
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
                 <h1>Colors</h1>
+                <h1>Primary Colors</h1>
                 <GridList cellHeight={32} cols={Object.keys(props.colors).length}>
                     {
                         Object.keys(props.colors).map((color, index) => (
@@ -23,6 +24,21 @@ const colors = (props) => {
                         ))
                     }
                 </GridList>
+                <h1>Secondary Colors</h1>
+                <GridList cellHeight={32} cols={Object.keys(props.colors).length}>
+                    {
+                        Object.keys(props.colors).map((color, index) => (
+                            <GridListTile key={index}>
+                                <svg width="32" height="32">
+                                    <circle cx="16" cy="16" r="16" fill={props.colors[color]}>
+                                        <title>{color}</title>
+                                    </circle>
+                                </svg>
+                            </GridListTile>
+                        ))
+                    }
+                </GridList>
+                
                 {/* TODO: Implement the color tab... */}
             </Grid>
         </React.Fragment>

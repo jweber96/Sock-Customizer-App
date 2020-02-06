@@ -4,7 +4,7 @@ const initialState = () => {
     return {
         primaryColor: "",
         secondaryColor: "",
-        colors: { // Hard coded for now...
+        colors: { // Hard coded ROYGBIV colors for now...
             "red": "#FF0000",
             "orange": "#FF7F00",
             "yellow": "#FFFF00",

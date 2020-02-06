@@ -1,15 +1,26 @@
 import React from "react"
-import { Grid } from "@material-ui/core";
+import { Grid, GridList, GridListTile } from "@material-ui/core";
 import { connect } from "react-redux";
 import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
 
 
-const colors = () => {
+const colors = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
                 <h1>Colors</h1>
+                <GridList cellHeight={32} cols={Object.keys(props.colors).length}>
+                    {
+                        Object.keys(props.colors).map((color, index) => (
+                            <GridListTile key={index}>
+                                <svg width="32" height="32">
+                                    <circle cx="16" cy="16" r="16" fill={props.colors[color]} />
+                                </svg>
+                            </GridListTile>
+                        ))
+                    }
+                </GridList>
                 {/* TODO: Implement the color tab... */}
             </Grid>
         </React.Fragment>

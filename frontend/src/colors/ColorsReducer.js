@@ -3,7 +3,9 @@ import { PICK_PRIMARY_COLOR, PICK_SECONDARY_COLOR } from "./ColorsActions";
 const initialState = () => {
     return {
         primaryColor: "",
+        primaryColorCode: "",
         secondaryColor: "",
+        secondaryColorCode: "",
         colors: { // Hard coded ROYGBIV colors for now...
             "red": "#FF0000",
             "orange": "#FF7F00",

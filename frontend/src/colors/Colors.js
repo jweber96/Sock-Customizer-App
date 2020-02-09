@@ -1,12 +1,11 @@
 import React from "react"
 import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
-import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
 import ColorsPicker from "./ColorsPicker";
 
 
-const colors = (props) => {
+const colors = () => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
@@ -18,18 +17,15 @@ const colors = (props) => {
     );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
-        primaryColor: state.colors.primaryColor,
-        secondaryColor: state.colors.secondaryColor,
-        colors: state.colors.colors
+        // Nothing to map yet...
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = () => {
     return {
-        inputPrimaryColor: (color) => dispatch(pickPrimaryColor(color)),
-        inputSecondaryColor: (color) => dispatch(pickSecondaryColor(color))
+        // Nothing to map yet...
     };
 }
 

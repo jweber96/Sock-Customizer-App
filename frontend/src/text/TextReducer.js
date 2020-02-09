@@ -2,10 +2,10 @@ import { INPUT_TOE_PRIMARY_TEXT, INPUT_TOE_SECONDARY_TEXT, INPUT_BRIM_PRIMARY_TE
 
 const initialState = () => {
     return {
-        toePrimaryText: "",
-        toeSecondaryText: "",
-        brimPrimaryText: "",
-        brimSecondaryText: ""
+        toePrimaryText: null,
+        toeSecondaryText: null,
+        brimPrimaryText: null,
+        brimSecondaryText: null
     };
 };
 

@@ -1,6 +1,7 @@
 import React from "react"
-import { GridList, GridListTile } from "@material-ui/core";
 import { connect } from "react-redux";
+import { GridList, GridListTile, IconButton } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
 
@@ -12,6 +13,14 @@ const colors = (props) => {
         props.isPrimary ? props.inputPrimaryColor(color, code) : props.inputSecondaryColor(color, code);
     }
 
+    const handleReset = () => {
+        props.isPrimary ? props.inputPrimaryColor(null, null) : props.inputSecondaryColor(null, null);
+    }
+
+    const canShowDelete = () => {
+        return props.isPrimary ? props.primaryColor !== null : props.secondaryColor !== null;
+    }
+
     return (
         <React.Fragment>
             {
@@ -19,26 +28,12 @@ const colors = (props) => {
                 ? (
                     <React.Fragment>
                         <h1>Primary Colors</h1>
-                        {
-                            props.primaryColor === ""
-                            ? (
-                                <p>No color picked!</p>
-                            ) : (
-                                <p>{props.primaryColor}</p>
-                            )
-                        }
+                        <p>{props.primaryColor || "No color picked!"}</p>
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
                         <h1>Secondary Colors</h1>
-                        {
-                            props.secondaryColor === ""
-                            ? (
-                                <p>No color picked!</p>
-                            ) : (
-                                <p>{props.secondaryColor}</p>
-                            )
-                        }
+                        <p>{props.secondaryColor || "No color picked!"}</p>
                     </React.Fragment>
                 )
             }
@@ -55,6 +50,18 @@ const colors = (props) => {
                     ))
                 }
             </GridList>
+            {
+                !canShowDelete()
+                ? (
+                    <IconButton disabled>
+                        <DeleteIcon fontSize="large" />
+                    </IconButton>
+                ) : (
+                    <IconButton onClick={handleReset}>
+                        <DeleteIcon fontSize="large" />
+                    </IconButton>
+                )
+            }
         </React.Fragment>
     );
 }
@@ -72,8 +79,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        inputPrimaryColor: (color) => dispatch(pickPrimaryColor(color)),
-        inputSecondaryColor: (color) => dispatch(pickSecondaryColor(color))
+        inputPrimaryColor: (color, code) => dispatch(pickPrimaryColor(color, code)),
+        inputSecondaryColor: (color, code) => dispatch(pickSecondaryColor(color, code))
     };
 }
 

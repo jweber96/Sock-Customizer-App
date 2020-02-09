@@ -28,26 +28,12 @@ const colors = (props) => {
                 ? (
                     <React.Fragment>
                         <h1>Primary Colors</h1>
-                        {
-                            props.primaryColor === null
-                            ? (
-                                <p>No color picked!</p>
-                            ) : (
-                                <p>{props.primaryColor}</p>
-                            )
-                        }
+                        <p>{props.primaryColor || "No color picked!"}</p>
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
                         <h1>Secondary Colors</h1>
-                        {
-                            props.secondaryColor === null
-                            ? (
-                                <p>No color picked!</p>
-                            ) : (
-                                <p>{props.secondaryColor}</p>
-                            )
-                        }
+                        <p>{props.secondaryColor || "No color picked!"}</p>
                     </React.Fragment>
                 )
             }

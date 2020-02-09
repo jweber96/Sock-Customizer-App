@@ -16,7 +16,7 @@ const cut = () => {
         <React.Fragment>
             <h1>Step 1: Select Cut Length</h1>
 
-            <Grid container direction="row" justify="space-around" alignItems="center">
+            <Grid container direction="row" justify="space-around" alignItems="center" background>
                 <Grid item sm container>
                     <Grid item container direction="column" justify="space-around" alignItems="center" spacing={2}>
                         <Grid item>

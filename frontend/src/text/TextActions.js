@@ -44,10 +44,10 @@ export const resetAllText = () => {
     return {
         type: RESET_ALL_TEXT,
         payload: {
-            toePrimaryText: "",
-            toeSecondaryText: "",
-            brimPrimaryText: "",
-            brimSecondaryText: "",
+            toePrimaryText: null,
+            toeSecondaryText: null,
+            brimPrimaryText: null,
+            brimSecondaryText: null,
         }
     };
 }

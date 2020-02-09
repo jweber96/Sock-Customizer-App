@@ -2,18 +2,18 @@ import { PICK_PRIMARY_COLOR, PICK_SECONDARY_COLOR } from "./ColorsActions";
 
 const initialState = () => {
     return {
-        primaryColor: "",
-        primaryColorCode: "",
-        secondaryColor: "",
-        secondaryColorCode: "",
+        primaryColor: null,
+        primaryColorCode: null,
+        secondaryColor: null,
+        secondaryColorCode: null,
         colors: { // Hard coded ROYGBIV colors for now...
-            "red": "#FF0000",
-            "orange": "#FF7F00",
-            "yellow": "#FFFF00",
-            "green": "#00FF00",
-            "blue": "#0000FF",
-            "indigo": "#4B0082",
-            "violet": "#9400D3",
+            "Red": "#FF0000",
+            "Orange": "#FF7F00",
+            "Yellow": "#FFFF00",
+            "Green": "#00FF00",
+            "Blue": "#0000FF",
+            "Indigo": "#4B0082",
+            "Violet": "#9400D3",
         }
     };
 };

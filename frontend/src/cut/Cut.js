@@ -6,8 +6,6 @@ import "typeface-roboto";
 
 
 const cut = (props) => {
-    console.log(props)
-
     return (
         <React.Fragment>
             <h1>Select Cut Length</h1>

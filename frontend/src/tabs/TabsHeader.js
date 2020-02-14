@@ -1,13 +1,14 @@
-import React from "react"
+import React from "react";
 import { connect } from "react-redux";
 import { AppBar, Tab, Tabs } from "@material-ui/core";
 import { clickTab } from "./TabsActions";
 import TabBody from "./TabsBody";
-import Design from "../design/Design"
-import Colors from "../colors/Colors"
-import Text from "../text/Text"
-import Logo from "../logo/Logo"
-import Details from "../details/Details"
+import Design from "../design/Design";
+import Colors from "../colors/Colors";
+import Text from "../text/Text";
+import Logo from "../logo/Logo";
+import Details from "../details/Details";
+import Preview from "../preview/Preview";
 import "typeface-roboto";
 
 
@@ -18,6 +19,7 @@ const tabsHeader = (props) => {
 
     return (
         <React.Fragment>
+            <Preview />
             <AppBar position="sticky" color="default">
                 <Tabs
                     value={props.value}

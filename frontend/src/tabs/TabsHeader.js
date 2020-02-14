@@ -8,7 +8,6 @@ import Colors from "../colors/Colors";
 import Text from "../text/Text";
 import Logo from "../logo/Logo";
 import Details from "../details/Details";
-import Preview from "../preview/Preview";
 import "typeface-roboto";
 
 
@@ -19,7 +18,6 @@ const tabsHeader = (props) => {
 
     return (
         <React.Fragment>
-            <Preview />
             <AppBar position="sticky" color="default">
                 <Tabs
                     value={props.value}

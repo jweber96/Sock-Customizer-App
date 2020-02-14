@@ -1,7 +1,7 @@
 import React from "react"
+import { connect } from "react-redux";
 import { Grid, IconButton, TextField } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { connect } from "react-redux";
 import { inputToePrimaryText, inputToeSecondaryText, inputBrimPrimaryText, inputBrimSecondaryText, resetAllText } from "./TextActions";
 import "typeface-roboto";
 
@@ -38,7 +38,6 @@ const text = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-            <h1>Text</h1>
             <TextField label="Toe Primary Text" variant="standard" value={props.toePrimaryText || ""} onChange={handleToePrimaryText} />
             <TextField label="Toe Secondary Text" variant="standard" value={props.toeSecondaryText || ""} onChange={handleToeSecondaryText} />
             <TextField label="Brim Primary Text" variant="standard" value={props.brimPrimaryText || ""} onChange={handleBrimPrimaryText} />

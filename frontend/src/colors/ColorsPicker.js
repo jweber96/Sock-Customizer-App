@@ -24,11 +24,17 @@ const colors = (props) => {
         if (preview) {
             const document = preview.contentDocument;
             if (props.isPrimary) {
-                const primary = document.getElementById("primaryColor");
-                primary.style.fill = code || "#000000";
+                const primaryColor = document.getElementById("primaryColor");
+                primaryColor.style.fill = code || "#000000";
             } else {
-                const secondary = document.getElementById("secondaryColor");
-                secondary.style.fill = code || "#000000";
+                const secondaryColor = document.getElementById("secondaryColor");
+                secondaryColor.style.fill = code || "#000000";
+
+                const toeText = document.getElementById("toeText");
+                toeText.style.fill = code || "#000000";
+
+                const brimText = document.getElementById("brimText");
+                brimText.style.fill = code || "#000000";
             }
         }
     }

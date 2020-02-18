@@ -10,7 +10,7 @@ const details = () => {
 
     return (
         <React.Fragment>
-            <Grid container style={{paddingLeft: 50}}>
+            <Grid container direction="column">
                 <PersonalInfo/>
                 <Address/>
             </Grid>

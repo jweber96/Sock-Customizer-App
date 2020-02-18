@@ -1,39 +1,19 @@
-export const INPUT_TOE_PRIMARY_TEXT = "INPUT_TOE_PRIMARY_TEXT";
-export const INPUT_TOE_SECONDARY_TEXT = "INPUT_TOE_SECONDARY_TEXT";
-export const INPUT_BRIM_PRIMARY_TEXT = "INPUT_BRIM_PRIMARY_TEXT";
-export const INPUT_BRIM_SECONDARY_TEXT = "INPUT_BRIM_SECONDARY_TEXT";
+export const INPUT_TOE_TEXT = "INPUT_TOE_TEXT";
+export const INPUT_BRIM_TEXT = "INPUT_BRIM_TEXT";
 export const RESET_ALL_TEXT = "RESET_ALL_TEXT";
 
-export const inputToePrimaryText = (text) => {
+export const inputToeText = (text) => {
     return {
-        type: INPUT_TOE_PRIMARY_TEXT,
+        type: INPUT_TOE_TEXT,
         payload: {
             text: text
         }
     };
 }
 
-export const inputToeSecondaryText = (text) => {
+export const inputBrimText = (text) => {
     return {
-        type: INPUT_TOE_SECONDARY_TEXT,
-        payload: {
-            text: text
-        }
-    };
-}
-
-export const inputBrimPrimaryText = (text) => {
-    return {
-        type: INPUT_BRIM_PRIMARY_TEXT,
-        payload: {
-            text: text
-        }
-    };
-}
-
-export const inputBrimSecondaryText = (text) => {
-    return {
-        type: INPUT_BRIM_SECONDARY_TEXT,
+        type: INPUT_BRIM_TEXT,
         payload: {
             text: text
         }
@@ -44,10 +24,8 @@ export const resetAllText = () => {
     return {
         type: RESET_ALL_TEXT,
         payload: {
-            toePrimaryText: null,
-            toeSecondaryText: null,
-            brimPrimaryText: null,
-            brimSecondaryText: null,
+            toeText: null,
+            brimText: null,
         }
     };
 }

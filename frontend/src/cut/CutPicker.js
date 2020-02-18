@@ -20,7 +20,7 @@ const cutPicker = (props) => {
                             <h2>{props.data.name} - ${props.data.price}</h2>
                         </Grid>
                         <Grid item>
-                            <img src={props.data.image} alt={props.data.description} />
+                            <img width={200} height={200} src={props.data.image} alt={props.data.description} />
                         </Grid>
                         <Grid item>
                             {
@@ -28,11 +28,11 @@ const cutPicker = (props) => {
                                 ? (
                                     <NavLink to="/customizer">
                                         {
-                                            props.cut === props.data.name
+                                            props.cut?.name === props.data.name
                                             ? (
                                                 <Button variant="contained" size="large" color="secondary">Selected</Button>
                                             ) : (
-                                                <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data.name)}>Available</Button>
+                                                <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
                                             )
                                         }
                                     </NavLink>

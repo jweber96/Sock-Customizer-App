@@ -8,30 +8,30 @@ import "typeface-roboto";
 const text = (props) => {
     const handleToeText = (event) => {
         props.inputToeText(event.target.value);
-        updatePreview(event.target.value, true);
+        updatePreview(true, event.target.value);
     }
 
     const handleBrimText = (event) => {
         props.inputBrimText(event.target.value);
-        updatePreview(event.target.value, false);
+        updatePreview(false, event.target.value);
     }
 
     const handleReset = () => {
         props.resetText();
-        updatePreview("", true);
-        updatePreview("", false);
+        updatePreview(true);
+        updatePreview(false);
     }
 
-    const updatePreview = (text, isToe) => {
+    const updatePreview = (isToe, text) => {
         const preview = document.getElementById("preview");
         if (preview) {
             const document = preview.contentDocument;
             if (isToe) {
                 const toeText = document.getElementById("toeText");
-                toeText.innerHTML = text;
+                toeText.innerHTML = text || "";
             } else {
                 const brimText = document.getElementById("brimText");
-                brimText.innerHTML = text;
+                brimText.innerHTML = text || "";
             }
         }
     }

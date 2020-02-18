@@ -11,10 +11,26 @@ const colors = (props) => {
         const color = event.target.children[0].innerHTML;
         const code = event.target.attributes.fill.value;
         props.isPrimary ? props.inputPrimaryColor(color, code) : props.inputSecondaryColor(color, code);
+        updatePreview(code);
     }
 
     const handleReset = () => {
         props.isPrimary ? props.inputPrimaryColor(null, null) : props.inputSecondaryColor(null, null);
+        updatePreview();
+    }
+
+    const updatePreview = (code) => {
+        const preview = document.getElementById("preview");
+        if (preview) {
+            const document = preview.contentDocument;
+            if (props.isPrimary) {
+                const primary = document.getElementById("primaryColor");
+                primary.style.fill = code || "#000000";
+            } else {
+                const secondary = document.getElementById("secondaryColor");
+                secondary.style.fill = code || "#000000";
+            }
+        }
     }
 
     const canShowDelete = () => {

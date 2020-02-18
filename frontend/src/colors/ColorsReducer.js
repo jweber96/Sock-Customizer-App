@@ -24,11 +24,13 @@ const textReducer = (state = initialState(), action) => {
             return {
                 ...state,
                 primaryColor: action.payload.color,
+                primaryColorCode: action.payload.code
             };
         case PICK_SECONDARY_COLOR:
             return {
                 ...state,
                 secondaryColor: action.payload.color,
+                secondaryColorCode: action.payload.code
             };
         default:
             return state;

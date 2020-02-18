@@ -7,7 +7,6 @@ const design = () => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-                <h1>Design</h1>
                 {/* TODO: Implement the design tab... */}
             </Grid>
         </React.Fragment>

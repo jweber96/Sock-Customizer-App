@@ -1,7 +1,7 @@
 import { INPUT_CUT } from "./CutActions";
-import QUARTER from "../images/quartersock.png";
-import CREW from "../images/crewsock.png";
-import KNEEHIGH from "../images/kneehighsock.png";
+import QUARTER from "../images/quartersock.svg";
+import CREW from "../images/crewsock.svg";
+import KNEEHIGH from "../images/kneehighsock.svg";
 
 const initialState = () => {
     return {
@@ -26,8 +26,8 @@ const initialState = () => {
                 image: KNEEHIGH,
                 price: 6.45,
                 description: "A knee high sized sock",
-                available: false
-            },
+                available: true
+            }
         ]
     };
 };

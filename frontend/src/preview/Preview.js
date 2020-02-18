@@ -13,6 +13,12 @@ const preview = (props) => {
 
             const secondary = document.getElementById("secondaryColor");
             secondary.style.fill = props.colors.secondaryColorCode || "#000000";
+
+            const toeText = document.getElementById("toeText");
+            toeText.innerHTML = props.text.toeText || "";
+
+            const brimText = document.getElementById("brimText");
+            brimText.innerHTML = props.text.brimText || "";
         }
     }
 

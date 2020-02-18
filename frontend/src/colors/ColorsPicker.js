@@ -24,10 +24,10 @@ const colors = (props) => {
         if (preview) {
             const document = preview.contentDocument;
             if (props.isPrimary) {
-                const primary = document.getElementById("primary");
+                const primary = document.getElementById("primaryColor");
                 primary.style.fill = code || "#000000";
             } else {
-                const secondary = document.getElementById("secondary");
+                const secondary = document.getElementById("secondaryColor");
                 secondary.style.fill = code || "#000000";
             }
         }

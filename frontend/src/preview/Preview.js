@@ -8,10 +8,10 @@ const preview = (props) => {
         if (preview) {
             const document = preview.contentDocument;
 
-            const primary = document.getElementById("primary");
+            const primary = document.getElementById("primaryColor");
             primary.style.fill = props.colors.primaryColorCode || "#000000";
 
-            const secondary = document.getElementById("secondary");
+            const secondary = document.getElementById("secondaryColor");
             secondary.style.fill = props.colors.secondaryColorCode || "#000000";
         }
     }

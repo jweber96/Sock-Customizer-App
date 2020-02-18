@@ -26,7 +26,7 @@ const initialState = () => {
                 image: KNEEHIGH,
                 price: 6.45,
                 description: "A knee high sized sock",
-                available: false
+                available: true
             }
         ]
     };

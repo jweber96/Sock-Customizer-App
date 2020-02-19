@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     root: {
       '& > *': {
         margin: theme.spacing(1),
-        width: 200,
+        paddingRight: 10
       },
     },
   }));
@@ -19,7 +19,7 @@ function Input(props) {
     const classes = useStyles();
     return (
       <form className={classes.root} autoComplete="off">
-        <TextField id="outlined-basic" variant="outlined" label={props.label} onChange={props.onChange} required={props.required}/>
+        <TextField fullWidth id="outlined-basic" variant="outlined" label={props.label} onChange={props.onChange} required={props.required}/>
       </form>
     );
 }

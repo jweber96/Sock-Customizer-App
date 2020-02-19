@@ -1,21 +1,37 @@
-import React from "react"
+import React, {Component} from "react"
 import { connect } from "react-redux";
-import { Typography, Grid, TextField} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Grid, Button} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import PersonalInfo from './Personal'
 import Address from './Address'
 import 'typeface-roboto';
 
-const details = () => {
+const Container = withStyles({
+    root: {
+        marginTop: 50
+    }
+})(Grid);
 
-    return (
-        <React.Fragment>
-            <Grid container direction="column">
-                <PersonalInfo/>
-                <Address/>
-            </Grid>
-        </React.Fragment>
-    );
+const Shift = withStyles({
+    root: {
+        marginTop: 10
+    }
+})(Grid);
+
+class details extends Component {
+    render() {
+        return (
+            <React.Fragment>
+                <Container container direction="column">
+                    <PersonalInfo/>
+                    <Address/>
+                    <Shift>
+                        <Button variant="contained" size="large" color="primary">Submit</Button>
+                    </Shift>
+                </Container>
+            </React.Fragment>
+        );
+    }
 }
 
 const mapStateToProps = () => {

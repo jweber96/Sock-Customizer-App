@@ -1,8 +1,7 @@
 from django.db import models
 from django.conf import settings
-
-#The models
-
+from django.contrib.auth.models import User
+from datetime import datetime
 
 DESIGNS = (
     ('VAPOR', 'Vapor'),
@@ -33,12 +32,14 @@ class Sizes(models.Model):
         return 'Y-' + str(self.youth) + ' Sm-' + str(self.small) + ' M-' + str(self.medium) + ' L-' + str(self.large) + ' XL-' + str(self.extra_large)
 
 class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=250, default="")
     last_name = models.CharField(max_length=250, default="")
     email = models.CharField(max_length=250, default="")
     phone_number= models.CharField(max_length=12, default="")
     organization = models.CharField(max_length=250, blank=True, null=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True, blank=True)
+    added_at = models.DateTimeField(blank=True, null=True, default=datetime.now)
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
@@ -53,6 +54,6 @@ class Order(models.Model):
     brim_secondary_text = models.CharField(max_length=250, blank=True, null=True)
     logo = models.ImageField(upload_to='logos/%Y/%m/%d', null=True, blank=True)
     sizes = models.ForeignKey(Sizes, on_delete=models.CASCADE, null=True, blank=True)
+    added_at = models.DateTimeField(blank=True, null=True, default=datetime.now)
     def __str__(self):
         return self.customer.first_name + ' ' + self.customer.last_name
-

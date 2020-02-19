@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Component} from "react"
 import { connect } from "react-redux";
 import 'typeface-roboto';
 import { Typography, Grid, TextField} from '@material-ui/core';
@@ -6,59 +6,59 @@ import { makeStyles } from '@material-ui/core/styles';
 import Input from './Input'
 import {street1, street2, city, state, zip, country } from './DetailsAction'
 
-const address = (props) => {
-
-    const handleStreet1Text = (event) => {
-        props.street1(event.target.value);
+class address extends Component {
+    constructor(props) {
+        super(props);
     }
+    render() {
+        const handleStreet1Text = (event) => {
+            this.props.street1(event.target.value);
+        }
 
-    const handleStreet2Text = (event) => {
-        props.street2(event.target.value);
-    }
+        const handleStreet2Text = (event) => {
+            this.props.street2(event.target.value);
+        }
 
-    const handleCityText = (event) => {
-        props.city(event.target.value);
-    }
+        const handleCityText = (event) => {
+            this.props.city(event.target.value);
+        }
 
-    const handleStateText = (event) => {
-        props.state(event.target.value);
-    }
+        const handleStateText = (event) => {
+            this.props.state(event.target.value);
+        }
 
-    const handleZipText = (event) => {
-        props.zip(event.target.value);
-    }
-    
-    const handleCountryText = (event) => {
-        props.country(event.target.value);
-    }
+        const handleZipText = (event) => {
+            this.props.zip(event.target.value);
+        }
+        
+        const handleCountryText = (event) => {
+            this.props.country(event.target.value);
+        }
 
-    return (
-        <React.Fragment>
-            <Typography variant="subtitle1">Address</Typography>
-            <Grid item xs={12}>
-                <Input label="Street" required={true} value={props.street1 || ""} onChange={handleStreet1Text}/>
-            </Grid>
-            <Grid item xs={12}>
-                <Input label="Apt/Suite/Other" required={false} value={props.street2 || ""} onChange={handleStreet2Text}/>
-            </Grid>
-            <Grid container direction="row">
-                <Grid item spacing={2}>
-                    <Input label="City" required={true} value={props.city || ""} onChange={handleCityText}/>
+        return (
+            <React.Fragment>
+                <Typography variant="subtitle1">Address</Typography>
+                <Input label="Street" required={true} value={this.props.street1 || ""} onChange={handleStreet1Text}/>
+                <Input label="Apt/Suite/Other" required={false} value={this.props.street2 || ""} onChange={handleStreet2Text}/>
+                <Grid container direction="row">
+                    <Grid item xs={6}>
+                        <Input label="City" required={true} value={this.props.city || ""} onChange={handleCityText}/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Input label="Zip" required={true} value={this.props.zip || ""} onChange={handleZipText}/>
+                    </Grid>
                 </Grid>
-                <Grid item spacing={2}>
-                    <Input label="Zip" required={true} value={props.zip || ""} onChange={handleZipText}/>
+                <Grid container direction="row">
+                    <Grid item xs={6}>
+                        <Input label="State" required={true} value={this.props.state || ""} onChange={handleStateText}/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Input label="Country" required={true} value={this.props.country || ""} onChange={handleCountryText}/>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Grid container direction="row">
-                <Grid item spacing={2}>
-                    <Input label="State" required={true} value={props.state || ""} onChange={handleStateText}/>
-                </Grid>
-                <Grid item spacing={2}>
-                    <Input label="Country" required={true} value={props.country || ""} onChange={handleCountryText}/>
-                </Grid>
-            </Grid>
-        </React.Fragment>
-    );
+            </React.Fragment>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {

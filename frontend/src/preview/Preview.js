@@ -8,17 +8,19 @@ const preview = (props) => {
         if (preview) {
             const document = preview.contentDocument;
 
-            const primary = document.getElementById("primaryColor");
-            primary.style.fill = props.colors.primaryColorCode || "#000000";
+            const primaryColor = document.getElementById("primaryColor");
+            primaryColor.style.fill = props.colors.primaryColorCode || "#000000";
 
-            const secondary = document.getElementById("secondaryColor");
-            secondary.style.fill = props.colors.secondaryColorCode || "#000000";
+            const secondaryColor = document.getElementById("secondaryColor");
+            secondaryColor.style.fill = props.colors.secondaryColorCode || "#000000";
 
             const toeText = document.getElementById("toeText");
             toeText.innerHTML = props.text.toeText || "";
+            toeText.style.fill = props.colors.secondaryColorCode || "#000000";
 
             const brimText = document.getElementById("brimText");
             brimText.innerHTML = props.text.brimText || "";
+            brimText.style.fill = props.colors.secondaryColorCode || "#000000";
         }
     }
 

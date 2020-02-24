@@ -1,13 +1,23 @@
 import React from "react"
 import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
+import DesignPicker from "./DesignPicker"
 import "typeface-roboto";
 
-const design = () => {
+const design = (props) => {
     return (
         <React.Fragment>
+            <h1>Select Design</h1>
             <Grid container direction="column" justify="center" alignItems="center">
-                {/* TODO: Implement the design tab... */}
+                <Grid container direction="row" justify="space-around" alignItems="center" style={{ backgroundColor: '#eff0f1', paddingBottom: 20 }}>
+                    {
+                        Object.keys(props.designs).map((index) => (
+                            <DesignPicker data={props.designs[index]} key={index} />
+                        ))
+                    }
+                </Grid>
+
+
             </Grid>
         </React.Fragment>
     );
@@ -15,7 +25,7 @@ const design = () => {
 
 const mapStateToProps = (state) => {
     return {
-        // Nothing to map yet...
+        designs: state.design.designs
     };
 }
 

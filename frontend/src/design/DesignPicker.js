@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 //import { NavLink } from "react-router-dom";
 import { inputDesign } from "./DesignActions";
@@ -15,9 +15,13 @@ const designPicker = (props) => {
         <React.Fragment>
             <div style={{ padding: 0 }}>
                 <Grid item sm container>
-                    <Grid item container direction="row" justify="space-around" alignItems="center" spacing={2}>
+                    <Grid item container direction="column" justify="space-around" alignItems="center" spacing={2}>
                         <Grid item>
                             <h2>{props.data.name}</h2>
+                        </Grid>
+                        <Grid item>
+                            <Button variant="contained" size="large" color="secondary" disabled="true">UNAVAILABLE</Button>
+                            {/* <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button> */}
                         </Grid>
                         <Grid item>
                             <img width={200} height={200} src={props.data.image} alt={props.data.description} />

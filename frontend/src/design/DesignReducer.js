@@ -1,7 +1,11 @@
 import { INPUT_DESIGN } from "./DesignActions";
-import QUARTER from "../images/quartersock.svg";
-import CREW from "../images/crewsock.svg";
-import KNEEHIGH from "../images/kneehighsock.svg";
+import VAPOR from "../images/vaporsock.jpg"
+import TWOTONE from "../images/twotonesock.jpg"
+import SPLITTOP from "../images/splittopsock.png"
+import STRIPE from "../images/stripesock.png"
+import DOUBLESTRIPE from "../images/doublestripe.png"
+import TRIPLESTRIPE from "../images/tripestripe.png"
+
 
 const initialState = () => {
     return {
@@ -9,43 +13,37 @@ const initialState = () => {
         designs: [ // Hard code the sock design for now...
             {
                 name: "Vapor",
-                image: QUARTER,
-                price: 5.45,
-                description: "A quarter sized sock",
+                image: VAPOR,
+                description: "A Vapor design sock",
                 available: true
             },
             {
                 name: "Two Tone",
-                image: CREW,
-                price: 5.95,
-                description: "A crew sized sock",
+                image: TWOTONE,
+                description: "A Two-Tone design sock",
                 available: true
             },
             {
                 name: "Split Top",
-                image: KNEEHIGH,
-                price: 6.45,
-                description: "A knee high sized sock",
+                image: SPLITTOP,
+                description: "A Split Top sock",
                 available: true
             },
             {
                 name: "Stripe",
-                image: KNEEHIGH,
-                price: 6.45,
-                description: "A knee high sized sock",
+                image: STRIPE,
+                description: "A Stripesock",
                 available: true
             },
             {
                 name: "Double Stripe",
-                image: KNEEHIGH,
-                price: 6.45,
-                description: "A knee high sized sock",
+                image: DOUBLESTRIPE,
+                description: "A Double Stripe sock",
                 available: true
             },
             {
                 name: "Triple Stripe",
-                image: KNEEHIGH,
-                price: 6.45,
+                image: TRIPLESTRIPE,
                 description: "A knee high sized sock",
                 available: true
             }

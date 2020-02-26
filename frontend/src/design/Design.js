@@ -7,15 +7,14 @@ import "typeface-roboto";
 const design = (props) => {
     return (
         <React.Fragment>
-
-            <Grid container direction="column" justify="space-around" alignItems="center" style={{ backgroundColor: '#eff0f1', paddingBottom: 20 }}>
+            <Grid container direction="column" justify="center" alignItems="center" style={{ backgroundColor: '#eff0f1', paddingBottom: 20 }}>
                 <h1>Select Design</h1>
-                <Grid container direction="row">
+                <Grid container direction="row" justify="center" alignItems="center" >
                     {<DesignPicker data={props.designs[0]} />}
                     {<DesignPicker data={props.designs[1]} />}
                     {<DesignPicker data={props.designs[2]} />}
                 </Grid>
-                <Grid container direction="row">
+                <Grid container direction="row" justify="center" alignItems="center" >
                     {<DesignPicker data={props.designs[3]} />}
                     {<DesignPicker data={props.designs[4]} />}
                     {<DesignPicker data={props.designs[5]} />}

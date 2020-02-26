@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { Box, Button, Grid } from "@material-ui/core";
+import { Button, Grid, Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import Preview from "../preview/Preview";
 import "typeface-roboto";
@@ -16,10 +16,12 @@ const tabsBody = (props) => {
                     ? (
                         props.cut.cut != null
                             ? (
-                                <Grid container direction="row" justify="center" alignItems="center" style={{ backgroundColor: "#eff0f1", marginTop: 50, width: "80%" }}>
-                                    <Grid xs={6}><Box p="3">{props.children}</Box></Grid>
-                                    <Grid xs={6}><Preview /></Grid>
-                                </Grid>
+                                <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", marginTop: 50, width: "75%" }}>
+                                    <Grid container direction="row" justify="center" alignItems="center">
+                                        <Grid justify="center" alignItems="center" xs={6}><div>{props.children}</div></Grid>
+                                        <Grid justify="center" alignItems="center" xs={6}><Preview /></Grid>
+                                    </Grid>
+                                </Paper>
                             ) : (
                                 <React.Fragment>
                                     <h1>No cut selected!</h1>

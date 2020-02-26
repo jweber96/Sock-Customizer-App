@@ -17,8 +17,8 @@ const tabsBody = (props) => {
                         props.cut.cut != null
                             ? (
                                 <Grid container direction="row" justify="center" alignItems="center" style={{ backgroundColor: "#eff0f1", marginTop: 50, width: "80%" }}>
-                                    <Grid item ><Box p="3">{props.children}</Box></Grid>
-                                    <Grid item ><Preview /></Grid>
+                                    <Grid xs={6}><Box p="3">{props.children}</Box></Grid>
+                                    <Grid xs={6}><Preview /></Grid>
                                 </Grid>
                             ) : (
                                 <React.Fragment>

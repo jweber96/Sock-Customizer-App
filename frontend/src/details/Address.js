@@ -1,59 +1,66 @@
 import React, {Component} from "react"
 import { connect } from "react-redux";
 import 'typeface-roboto';
-import { Typography, Grid, TextField} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Grid } from '@material-ui/core';
 import Input from './Input'
+import DropDown from './DropDown'
 import {street1, street2, city, state, zip, country } from './DetailsAction'
+
 
 class address extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isZip: true,
+        }
     }
+
+    handleStreet1Text = (event) => {
+        this.props.street1(event.target.value);
+    }
+    
+    handleStreet2Text = (event) => {
+        this.props.street2(event.target.value);
+    }
+    
+    handleCityText = (event) => {
+        this.props.city(event.target.value);
+    }
+    
+    handleStateText = (event) => {
+        this.props.state(event.target.value);
+    }
+    
+    handleZipText = (event) => {
+        this.setState({isZip: event.target.value.length === 5});
+        this.props.zip(event.target.value);
+    }
+    
+    handleCountryText = (event) => {
+        this.props.country(event.target.value);
+    }
+
     render() {
-        const handleStreet1Text = (event) => {
-            this.props.street1(event.target.value);
-        }
-
-        const handleStreet2Text = (event) => {
-            this.props.street2(event.target.value);
-        }
-
-        const handleCityText = (event) => {
-            this.props.city(event.target.value);
-        }
-
-        const handleStateText = (event) => {
-            this.props.state(event.target.value);
-        }
-
-        const handleZipText = (event) => {
-            this.props.zip(event.target.value);
-        }
-        
-        const handleCountryText = (event) => {
-            this.props.country(event.target.value);
-        }
-
+        const { isZip, isCountry } = this.state;
         return (
             <React.Fragment>
                 <Typography variant="subtitle1">Address</Typography>
-                <Input label="Street" required={true} value={this.props.street1 || ""} onChange={handleStreet1Text}/>
-                <Input label="Apt/Suite/Other" required={false} value={this.props.street2 || ""} onChange={handleStreet2Text}/>
+                <Input label="Street" required={true} value={this.props.street1 || ""} onChange={this.handleStreet1Text}/>
+                <Input label="Apt/Suite/Other" required={false} value={this.props.street2 || ""} onChange={this.handleStreet2Text}/>
                 <Grid container direction="row">
                     <Grid item xs={6}>
-                        <Input label="City" required={true} value={this.props.city || ""} onChange={handleCityText}/>
+                        <Input label="City" required={true} value={this.props.city || ""} onChange={this.handleCityText}/>
                     </Grid>
                     <Grid item xs={6}>
-                        <Input label="Zip" required={true} value={this.props.zip || ""} onChange={handleZipText}/>
+                        <Input label="Zip" required={true} value={this.props.zip || ""} onChange={this.handleZipText} error={isZip}/>
                     </Grid>
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs={6}>
-                        <Input label="State" required={true} value={this.props.state || ""} onChange={handleStateText}/>
+                        <Input label="State" required={true} value={this.props.state || ""} onChange={this.handleStateText}/>
                     </Grid>
                     <Grid item xs={6}>
-                        <Input label="Country" required={true} value={this.props.country || ""} onChange={handleCountryText}/>
+                        <DropDown title="Country" option1="United States" onChange={this.handleCountry}/>
                     </Grid>
                 </Grid>
             </React.Fragment>

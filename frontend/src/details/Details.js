@@ -1,10 +1,11 @@
-import React, {Component} from "react"
+import React from "react"
 import { connect } from "react-redux";
-import { Typography, Grid, Button} from '@material-ui/core';
+import { Grid, Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import PersonalInfo from './Personal'
 import Address from './Address'
 import 'typeface-roboto';
+import Store from '../Store'
 
 const Container = withStyles({
     root: {
@@ -18,25 +19,72 @@ const Shift = withStyles({
     }
 })(Grid);
 
-class details extends Component {
-    render() {
-        return (
-            <React.Fragment>
-                <Container container direction="column">
-                    <PersonalInfo/>
-                    <Address/>
-                    <Shift>
-                        <Button variant="contained" size="large" color="primary">Submit</Button>
-                    </Shift>
-                </Container>
-            </React.Fragment>
-        );
+const details = (props) => {
+
+    const submitOrder = () => {
+
+        // let customer = {
+        //     "address": {
+        //         "street1": props.details.street1,
+        //         "street2": props.details.street2,
+        //         "city": props.details.city,
+        //         "state": props.details.state,
+        //         "zip": props.details.zip,
+        //         "country": props.details.country
+        //     },
+        //     "first_name": props.details.firstName,
+        //     "last_name": props.details.lastName,
+        //     "email": props.details.email,
+        //     "phone_number": props.details.phoneNumber,
+        //     "user": 2
+        // }
+
+        // let order = {
+        //     "customer": "1",
+        //     "sizes": {
+        //         "youth": null,
+        //         "small": null,
+        //         "medium": null,
+        //         "large": null,
+        //         "extra_large": null
+        //     },
+        //     "design": null,
+        //     "primary_color": "",
+        //     "secondary_color": "",
+        //     "toe_primary_text": "",
+        //     "toe_secondary_text": "",
+        //     "brim_primary_text": "",
+        //     "brim_secondary_text": "",
+        //     "logo": null,
+        //     "added_at": null
+        // }
+        // const request = fetch('http://127.0.0.1:8000/api/customers', {
+        //     method: 'POST',
+        //     headers: {"content-type": "application/json"},
+        //     body: JSON.stringify(customer)
+        // })
     }
+
+    return (
+        <React.Fragment>
+            <Container container direction="column">
+                <PersonalInfo/>
+                <Address/>
+                <Shift>
+                    <Button variant="contained" size="large" color="primary" onClick={()=>submitOrder()}>Submit</Button>
+                </Shift>
+            </Container>
+        </React.Fragment>
+    );
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-        // Nothing to map yet...
+        colors: state.colors,
+        text: state.text,
+        logo: state.logo,
+        cut: state.cut,
+        details: state.details
     };
 }
 

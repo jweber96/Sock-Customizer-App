@@ -9,7 +9,13 @@ DESIGNS = (
     ('SPLIT_TOP', 'Split Top'),
     ('STRIPE', 'Stripe'),
     ('DOUBLE_STRIPE', 'Double Stripe'),
-    ('TRIPLE_STRIPE', 'Triple Stripe'),
+    ('TRIPLE_STRIPE', 'Triple Stripe')
+)
+
+CUTS = (
+    ('QUARTER', 'Quarter'),
+    ('CREW', 'Crew'),
+    ('KNEE_HIGH', 'Knee High')
 )
 
 class Address(models.Model):
@@ -45,6 +51,7 @@ class Customer(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    cut = models.CharField("Cuts", choices=CUTS, null=True, blank=True, max_length=250)
     design = models.CharField("Designs", choices=DESIGNS, null=True, blank=True, max_length=250)
     primary_color = models.CharField(max_length=250)
     secondary_color = models.CharField(max_length=250, blank=True, null=True)

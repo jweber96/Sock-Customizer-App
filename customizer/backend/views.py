@@ -4,12 +4,22 @@ from backend.models import Customer, Order
 from backend.serializers import CustomerSerializer, OrderSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.http import HttpResponse
 
 class CustomerViewSet(viewsets.ModelViewSet):
-    queryset = Customer.objects.all()
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            queryset = Customer.objects.all()  
+            return queryset  
+        else:
+            return HttpResponse(status=403) 
     serializer_class = CustomerSerializer
-    # permission_classes = [IsAccountAdminOrReadOnly]
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            queryset = Order.objects.all() 
+            return queryset   
+        else:
+            return HttpResponse(status=403) 
     serializer_class = OrderSerializer

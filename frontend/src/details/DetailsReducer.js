@@ -1,4 +1,4 @@
-import { FIRST_NAME, LAST_NAME, ORGANIZATION, PHONE_NUMBER, EMAIL, STREET1, STREET2, CITY, STATE, ZIP, COUNTRY } from "./DetailsActions";
+import { FIRST_NAME, LAST_NAME, ORGANIZATION, PHONE_NUMBER, EMAIL, STREET1, STREET2, CITY, STATE, ZIP, COUNTRY } from "./DetailsAction";
 
 const initialState = () => {
     return {

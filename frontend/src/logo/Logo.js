@@ -17,6 +17,7 @@ const logo = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
+            <h1>Add Logo</h1>
             {
                 props.logo !== null
                 ? (

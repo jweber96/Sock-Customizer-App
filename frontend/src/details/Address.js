@@ -34,32 +34,44 @@ class address extends Component {
     handleZipText = (event) => {
         this.setState({isZip: event.target.value.length === 5});
         this.props.zip(event.target.value);
+        this.confirmErrors()
     }
     
     handleCountryText = (event) => {
         this.props.country(event.target.value);
     }
 
+    confirmErrors = () => {
+        const { isZip } = this.state
+        if (isZip) {
+            this.props.addressErrors()
+        }
+    }
+
     render() {
-        const { isZip, isCountry } = this.state;
+        const { isZip } = this.state;
         return (
             <React.Fragment>
                 <Typography variant="subtitle1">Address</Typography>
-                <Input label="Street" required={true} value={this.props.street1 || ""} onChange={this.handleStreet1Text}/>
-                <Input label="Apt/Suite/Other" required={false} value={this.props.street2 || ""} onChange={this.handleStreet2Text}/>
+                <Grid item xs={8}>
+                    <Input label="Street" required={true} value={this.props.street1 || ""} onChange={this.handleStreet1Text}/>
+                </Grid>
+                <Grid item xs={8}>
+                    <Input label="Apt/Suite/Other" required={false} value={this.props.street2 || ""} onChange={this.handleStreet2Text}/>
+                </Grid>
                 <Grid container direction="row">
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Input label="City" required={true} value={this.props.city || ""} onChange={this.handleCityText}/>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Input label="Zip" required={true} value={this.props.zip || ""} onChange={this.handleZipText} error={isZip}/>
                     </Grid>
                 </Grid>
                 <Grid container direction="row">
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <Input label="State" required={true} value={this.props.state || ""} onChange={this.handleStateText}/>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <DropDown title="Country" option1="United States" onChange={this.handleCountry}/>
                     </Grid>
                 </Grid>

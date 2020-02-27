@@ -4,6 +4,13 @@ import { Grid, IconButton, TextField } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { inputToeText, inputBrimText, resetAllText } from "./TextActions";
 import "typeface-roboto";
+import { withStyles } from '@material-ui/core/styles';
+
+const StyledTextContainer = withStyles({
+    root: {
+        marginTop: 15
+    }
+})(TextField);
 
 const text = (props) => {
     const handleToeText = (event) => {
@@ -46,8 +53,9 @@ const text = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-            <TextField label="Toe Text" variant="standard" value={props.toeText || ""} onChange={handleToeText} />
-            <TextField label="Brim Text" variant="standard" value={props.brimText || ""} onChange={handleBrimText} />
+            <h1>Add Text</h1>
+            <TextField label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
+            <StyledTextContainer label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
             {
                 !canShowDelete()
                 ? (

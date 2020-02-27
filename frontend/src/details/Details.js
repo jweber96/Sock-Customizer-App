@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Component} from "react"
 import { connect } from "react-redux";
 import { Grid, Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,19 +9,26 @@ import Store from '../Store'
 
 const Container = withStyles({
     root: {
-        marginTop: 50
+        marginLeft: 25
     }
 })(Grid);
 
 const Shift = withStyles({
     root: {
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 15
     }
 })(Grid);
 
-const details = (props) => {
-
-    const submitOrder = () => {
+class details extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isPersonal: false,
+            isAddress: false
+        }
+    }
+    submitOrder = () => {
 
         // let customer = {
         //     "address": {
@@ -65,17 +72,20 @@ const details = (props) => {
         // })
     }
 
-    return (
-        <React.Fragment>
-            <Container container direction="column">
-                <PersonalInfo/>
-                <Address/>
-                <Shift>
-                    <Button variant="contained" size="large" color="primary" onClick={()=>submitOrder()}>Submit</Button>
-                </Shift>
-            </Container>
-        </React.Fragment>
-    );
+    render() {
+        return (
+            <React.Fragment>
+                <Container container direction="column">
+                    <h1>Your Information</h1>
+                    <PersonalInfo personalErrors={()=>this.setState({isPersonal: true})}/>
+                    <Address addressErrors={()=>this.setState({isAddress: true})}/>
+                    <Shift>
+                        <Button variant="contained" size="large" color="primary" onClick={()=>this.submitOrder()}>Submit</Button>
+                    </Shift>
+                </Container>
+            </React.Fragment>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {

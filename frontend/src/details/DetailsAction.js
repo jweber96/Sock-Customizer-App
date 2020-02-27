@@ -9,6 +9,10 @@ export const CITY = "CITY"
 export const STATE = "STATE"
 export const ZIP = "ZIP"
 export const COUNTRY = "COUNTRY"
+export const YOUTH = "YOUTH"
+export const SMALL = "SMALL"
+export const MEDIUM = "MEDIUM"
+export const LARGE = "LARGE"
 
 export const firstName = (text) => {
     return {
@@ -109,7 +113,42 @@ export const country = (text) => {
     };
 }
 
+export const youth = (text) => {
+    return {
+        type: YOUTH,
+        payload: {
+            text: text
+        }
+    };
+}
 
+export const small = (text) => {
+    return {
+        type: SMALL,
+        payload: {
+            text: text
+        }
+    };
+}
+
+export const medium = (text) => {
+    return {
+        type: MEDIUM,
+        payload: {
+            text: text
+        }
+    };
+}
+
+
+export const large = (text) => {
+    return {
+        type: LARGE,
+        payload: {
+            text: text
+        }
+    };
+}
 // export const resetAllText = () => {
 //     return {
 //         type: RESET_ALL_TEXT,

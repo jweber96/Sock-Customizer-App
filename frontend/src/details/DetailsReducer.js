@@ -1,4 +1,4 @@
-import { FIRST_NAME, LAST_NAME, ORGANIZATION, PHONE_NUMBER, EMAIL, STREET1, STREET2, CITY, STATE, ZIP, COUNTRY } from "./DetailsAction";
+import { FIRST_NAME, LAST_NAME, ORGANIZATION, PHONE_NUMBER, EMAIL, STREET1, STREET2, CITY, STATE, ZIP, COUNTRY, YOUTH, SMALL, MEDIUM, LARGE } from "./DetailsAction";
 
 const initialState = () => {
     return {
@@ -12,7 +12,11 @@ const initialState = () => {
         city: null, 
         state: null,
         zip: null, 
-        country: null
+        country: null,
+        youth: null,
+        small: null,
+        medium: null,
+        large: null,
     };
 };
 
@@ -72,6 +76,26 @@ const detailsReducer = (state = initialState(), action) => {
             return {
                 ...state,
                 country: action.payload.text
+            };
+        case YOUTH:
+            return {
+                ...state,
+                youth: action.payload.text
+            };
+        case SMALL:
+            return {
+                ...state,
+                small: action.payload.text
+            };
+        case MEDIUM:
+            return {
+                ...state,
+                medium: action.payload.text
+            };
+        case LARGE:
+            return {
+                ...state,
+                large: action.payload.text
             };
         default:
             return state;

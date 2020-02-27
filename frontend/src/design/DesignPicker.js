@@ -13,20 +13,18 @@ const designPicker = (props) => {
 
     return (
         <React.Fragment>
-            <div style={{ padding: 20 }}>
-                <Grid container direction="column" justify="center" alignItems="center">
-                    <Grid item>
-                        <h2>{props.data.name}</h2>
-                    </Grid>
-                    <Grid item>
-                        <img width={150} height={150} src={props.data.image} alt={props.data.description} />
-                    </Grid>
-                    <Grid item>
-                        <Button variant="contained" size="large" color="secondary" disabled="true">UNAVAILABLE</Button>
-                        {/* <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button> */}
-                    </Grid>
+            <Grid container xs direction="column" justify="center" alignItems="center">
+                <Grid item>
+                    <h2>{props.data.name}</h2>
                 </Grid>
-            </div>
+                <Grid item>
+                    <img width={150} height={150} src={props.data.image} alt={props.data.description} />
+                </Grid>
+                <Grid item>
+                    <Button variant="contained" size="large" color="secondary" disabled="true">UNAVAILABLE</Button>
+                    {/* <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button> */}
+                </Grid>
+            </Grid>
         </React.Fragment>
     );
 }

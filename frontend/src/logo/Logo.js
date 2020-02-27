@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { IconButton, Grid } from "@material-ui/core";
+import { Input, IconButton, Grid } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { inputLogo, resetLogo } from "./LogoActions";
 import "typeface-roboto";
@@ -28,7 +28,7 @@ const logo = (props) => {
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        <input type="file" accept="image/*" onChange={handleInput} />
+                        <Input type="file" accept="image/*" onChange={handleInput} />
                         <IconButton disabled>
                             <DeleteIcon fontSize="large" />
                         </IconButton>

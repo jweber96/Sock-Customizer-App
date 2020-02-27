@@ -10,13 +10,44 @@ const colorsPicker = (props) => {
     const handlePick = (event) => {
         const color = event.target.children[0].innerHTML;
         const code = event.target.attributes.fill.value;
+        const id = event.target.id;
         props.isPrimary ? props.inputPrimaryColor(color, code) : props.inputSecondaryColor(color, code);
+        updateColors(id);
         updatePreview(code);
     }
 
     const handleReset = () => {
+        var id = "";
+        props.isPrimary ? id = "primary_" + props.primaryColor : id = "secondary_" + props.secondaryColor;
+        normalize(id);
+
         props.isPrimary ? props.inputPrimaryColor(null, null) : props.inputSecondaryColor(null, null);
         updatePreview();
+    }
+
+    const updateColors = (id) => {
+        var index = "";
+        for (var color in props.colors) {
+            props.isPrimary ? index = "primary_" + color : index = "secondary_" + color;
+            normalize(index);
+        }
+        identify(id);
+    }
+
+    const normalize = (id) => {
+        var selected = document.getElementById(id);
+        selected.style.stroke = "black";
+        selected.style.strokeWidth = "2";
+        selected.style.r = "15";
+        selected.style.fillOpacity = "100%";
+    }
+
+    const identify = (id) => {
+        var selected = document.getElementById(id);
+        selected.style.stroke = "red";
+        selected.style.strokeWidth = "4";
+        selected.style.r = "14";
+        selected.style.fillOpacity = "80%";
     }
 
     const updatePreview = (code) => {
@@ -59,12 +90,12 @@ const colorsPicker = (props) => {
                     </div>
                 )
             }
-            <Grid container direction="row" justify="center" alignItems="center" cols={Object.keys(props.colors).length}>
+            <Grid container direction="row" justify="center" alignItems="center" cols={13}>
                 {
                     Object.keys(props.colors).map((color, index) => (
                         <Grid item key={index}>
                             <svg width="32" height="32">
-                                <circle cx="16" cy="16" r="16" fill={props.colors[color]} onClick={handlePick}>
+                            <circle id={props.isPrimary ? "primary_" + color : "secondary_" + color} cx="16" cy="16" r="15" stroke="black" strokeWidth="2" onClick={handlePick} fill={props.colors[color]}>
                                     <title>{color}</title>
                                 </circle>
                             </svg>

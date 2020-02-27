@@ -13,37 +13,35 @@ const cutPicker = (props) => {
 
     return (
         <React.Fragment>
-            <div style={{ padding: 0 }}>
-                <Grid item sm container>
-                    <Grid item container direction="column" justify="space-around" alignItems="center" spacing={2}>
-                        <Grid item>
-                            <h2>{props.data.name} - ${props.data.price}</h2>
-                        </Grid>
-                        <Grid item>
-                            <img width={200} height={200} src={props.data.image} alt={props.data.description} />
-                        </Grid>
-                        <Grid item>
-                            {
-                                props.data.available
-                                    ? (
-                                        <NavLink to="/customizer">
-                                            {
-                                                props.cut ?.name === props.data.name
-                                                    ? (
-                                                        <Button variant="contained" size="large" color="secondary">Selected</Button>
-                                                    ) : (
-                                                        <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
-                                                    )
-                                        }
-                                        </NavLink>
-                                    ) : (
-                                        <Button variant="contained" size="large" color="primary" disabled>Unavailable</Button>
-                                    )
-                            }
-                        </Grid>
+            <Grid item>
+                <Grid container direction="column" justify="space-around" alignItems="center">
+                    <Grid item>
+                        <h2>{props.data.name} - ${props.data.price}</h2>
+                    </Grid>
+                    <Grid item>
+                        <img width={200} height={200} src={props.data.image} alt={props.data.description} />
+                    </Grid>
+                    <Grid item>
+                        {
+                            props.data.available
+                            ? (
+                                <NavLink to="/customizer">
+                                    {
+                                        props.cut ?.name === props.data.name
+                                            ? (
+                                                <Button variant="contained" size="large" color="secondary">Selected</Button>
+                                            ) : (
+                                                <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
+                                            )
+                                }
+                                </NavLink>
+                            ) : (
+                                <Button variant="contained" size="large" color="primary" disabled>Unavailable</Button>
+                            )
+                        }
                     </Grid>
                 </Grid>
-            </div>
+            </Grid>
         </React.Fragment>
     );
 }

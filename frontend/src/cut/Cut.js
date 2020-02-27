@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import { connect } from "react-redux";
 import CutPicker from "./CutPicker";
 import "typeface-roboto";
@@ -8,14 +8,18 @@ import "typeface-roboto";
 const cut = (props) => {
     return (
         <React.Fragment>
-            <h1>Select Cut Length</h1>
-            <Grid container direction="row" justify="space-around" alignItems="center" style={{ backgroundColor: '#eff0f1', paddingBottom: 20 }}>
-                {
-                    Object.keys(props.cuts).map((index) => (
-                        <CutPicker data={props.cuts[index]} key={index} />
-                    ))
-                }
-            </Grid>
+            <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", marginTop: "50px", marginBottom: "50px", width: "90%" }}>
+                <Grid container justify="center" alignItems="center">
+                    <h1>Select Cut Length</h1>
+                </Grid>
+                <Grid container direction="row" justify="center" alignItems="center" style={{margin: "20px"}}>
+                    {
+                        Object.keys(props.cuts).map((index) => (
+                            <CutPicker data={props.cuts[index]} key={index} />
+                        ))
+                    }
+                </Grid>
+            </Paper>
         </React.Fragment>
     );
 }

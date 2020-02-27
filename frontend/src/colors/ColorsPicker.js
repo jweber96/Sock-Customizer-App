@@ -1,12 +1,12 @@
 import React from "react"
 import { connect } from "react-redux";
-import { GridList, GridListTile, IconButton } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
 
 
-const colors = (props) => {
+const colorsPicker = (props) => {
     const handlePick = (event) => {
         const color = event.target.children[0].innerHTML;
         const code = event.target.attributes.fill.value;
@@ -79,30 +79,30 @@ const colors = (props) => {
             {
                 props.isPrimary
                 ? (
-                    <React.Fragment>
+                    <div>
                         <h1>Primary Colors</h1>
                         <p>{props.primaryColor || "No color picked!"}</p>
-                    </React.Fragment>
+                    </div>
                 ) : (
-                    <React.Fragment>
+                    <div>
                         <h1>Secondary Colors</h1>
                         <p>{props.secondaryColor || "No color picked!"}</p>
-                    </React.Fragment>
+                    </div>
                 )
             }
-            <GridList cellHeight={32} cols={13}>
+            <Grid container direction="row" justify="center" alignItems="center" cols={13}>
                 {
                     Object.keys(props.colors).map((color, index) => (
-                        <GridListTile key={index}>
+                        <Grid item key={index}>
                             <svg width="32" height="32">
                             <circle id={props.isPrimary ? "primary_" + color : "secondary_" + color} cx="16" cy="16" r="15" stroke="black" strokeWidth="2" onClick={handlePick} fill={props.colors[color]}>
                                     <title>{color}</title>
                                 </circle>
                             </svg>
-                        </GridListTile>
+                        </Grid>
                     ))
                 }
-            </GridList>
+            </Grid>
             {
                 !canShowDelete()
                 ? (
@@ -137,4 +137,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(colors)
+export default connect(mapStateToProps, mapDispatchToProps)(colorsPicker)

@@ -4,8 +4,8 @@ import { Grid, Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import PersonalInfo from './Personal'
 import Address from './Address'
+import Sizes from './Sizes'
 import 'typeface-roboto';
-import Store from '../Store'
 
 const Container = withStyles({
     root: {
@@ -15,7 +15,7 @@ const Container = withStyles({
 
 const Shift = withStyles({
     root: {
-        marginTop: 10,
+        marginTop: 15,
         marginBottom: 15
     }
 })(Grid);
@@ -64,7 +64,7 @@ class details extends Component {
         //     "brim_secondary_text": "",
         //     "logo": null,
         //     "added_at": null
-        // }
+        // }a
         // const request = fetch('http://127.0.0.1:8000/api/customers', {
         //     method: 'POST',
         //     headers: {"content-type": "application/json"},
@@ -76,9 +76,10 @@ class details extends Component {
         return (
             <React.Fragment>
                 <Container container direction="column">
-                    <h1>Your Information</h1>
+                    <h1>Confirm Your Order</h1>
                     <PersonalInfo personalErrors={()=>this.setState({isPersonal: true})}/>
                     <Address addressErrors={()=>this.setState({isAddress: true})}/>
+                    <Sizes/>
                     <Shift>
                         <Button variant="contained" size="large" color="primary" onClick={()=>this.submitOrder()}>Submit</Button>
                     </Shift>

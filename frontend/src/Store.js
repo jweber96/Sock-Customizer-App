@@ -6,6 +6,7 @@ import ColorsReducer from "./colors/ColorsReducer";
 import TextReducer from "./text/TextReducer";
 import LogoReducer from "./logo/LogoReducer";
 import CutReducer from "./cut/CutReducer";
+import DetailsReducer from "./details/DetailsReducer";
 
 const reducers = () => {
     return combineReducers({
@@ -14,7 +15,8 @@ const reducers = () => {
         text: TextReducer,
         logo: LogoReducer,
         cut: CutReducer,
-        design: DesignReducer
+        design: DesignReducer,
+        details: DetailsReducer
     });
 }
 

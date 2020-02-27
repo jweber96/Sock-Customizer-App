@@ -1,79 +1,90 @@
 import React from "react"
 import { connect } from "react-redux";
-import { Typography, Grid, TextField} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Button} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import PersonalInfo from './Personal'
+import Address from './Address'
 import 'typeface-roboto';
+import Store from '../Store'
 
-const details = () => {
+const Container = withStyles({
+    root: {
+        marginTop: 50
+    }
+})(Grid);
+
+const Shift = withStyles({
+    root: {
+        marginTop: 10
+    }
+})(Grid);
+
+const details = (props) => {
+
+    const submitOrder = () => {
+
+        // let customer = {
+        //     "address": {
+        //         "street1": props.details.street1,
+        //         "street2": props.details.street2,
+        //         "city": props.details.city,
+        //         "state": props.details.state,
+        //         "zip": props.details.zip,
+        //         "country": props.details.country
+        //     },
+        //     "first_name": props.details.firstName,
+        //     "last_name": props.details.lastName,
+        //     "email": props.details.email,
+        //     "phone_number": props.details.phoneNumber,
+        //     "user": 2
+        // }
+
+        // let order = {
+        //     "customer": "1",
+        //     "sizes": {
+        //         "youth": null,
+        //         "small": null,
+        //         "medium": null,
+        //         "large": null,
+        //         "extra_large": null
+        //     },
+        //     "design": null,
+        //     "primary_color": "",
+        //     "secondary_color": "",
+        //     "toe_primary_text": "",
+        //     "toe_secondary_text": "",
+        //     "brim_primary_text": "",
+        //     "brim_secondary_text": "",
+        //     "logo": null,
+        //     "added_at": null
+        // }
+        // const request = fetch('http://127.0.0.1:8000/api/customers', {
+        //     method: 'POST',
+        //     headers: {"content-type": "application/json"},
+        //     body: JSON.stringify(customer)
+        // })
+    }
+
     return (
         <React.Fragment>
-            <Grid container style={{paddingLeft: 50}}>
-                <Typography variant="subtitle1">Personal Information</Typography>
-                <Grid container direction="row">
-                    <Grid item spacing={2}>
-                        <Input label="First Name" required={true}/>
-                    </Grid>
-                    <Grid spacing={2}>
-                        <Input label="Last Name" required={true}/>
-                    </Grid>
-                </Grid>
-                <Grid container direction="row">
-                    <Grid item spacing={2}>
-                        <Input label="Email" required={true}/>
-                    </Grid>
-                    <Grid item spacing={2}>
-                        <Input label="Phone Number" required={true}/>
-                    </Grid>
-                </Grid>
-                <Typography variant="subtitle1">Address</Typography>
-                <Grid item xs={12}>
-                    <Input label="Street" required={true}/>
-                </Grid>
-                <Grid item xs={12}>
-                    <Input label="Apt/Suite/Other" required={false}/>
-                </Grid>
-                <Grid container direction="row">
-                    <Grid item spacing={2}>
-                        <Input label="City" required={true}/>
-                    </Grid>
-                    <Grid item spacing={2}>
-                        <Input label="Zip" required={true}/>
-                    </Grid>
-                </Grid>
-                <Grid container direction="row">
-                    <Grid item spacing={2}>
-                        <Input label="State" required={true}/>
-                    </Grid>
-                    <Grid item spacing={2}>
-                        <Input label="Country" required={true}/>
-                    </Grid>
-                </Grid>
-            </Grid>
+            <Container container direction="column">
+                <PersonalInfo/>
+                <Address/>
+                <Shift>
+                    <Button variant="contained" size="large" color="primary" onClick={()=>submitOrder()}>Submit</Button>
+                </Shift>
+            </Container>
         </React.Fragment>
     );
 }
 
-const useStyles = makeStyles(theme => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: 200,
-      },
-    },
-  }));
-
-function Input(props) {
-    const classes = useStyles();
-    return (
-      <form className={classes.root} autoComplete="off">
-        <TextField id="outlined-basic" variant="outlined" label={props.label} onChange={props.onChange} required={props.required}/>
-      </form>
-    );
-}
-
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-        // Nothing to map yet...
+        colors: state.colors,
+        text: state.text,
+        logo: state.logo,
+        cut: state.cut,
+        details: state.details
     };
 }
 

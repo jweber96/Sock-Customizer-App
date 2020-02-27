@@ -16,7 +16,7 @@ const tabsBody = (props) => {
                     ? (
                         props.cut.cut != null
                             ? (
-                                <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", marginTop: "50px", marginBottom: "50px", width: "90%" }}>
+                                <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", margin: "20px"}}>
                                     <Grid container direction="row" justify="center" alignItems="center" style={{margin: "20px"}}>
                                         <Grid item xs={6} ><div>{props.children}</div></Grid>
                                         <Grid item xss={6}><Preview /></Grid>

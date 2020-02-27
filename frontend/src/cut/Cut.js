@@ -8,7 +8,7 @@ import "typeface-roboto";
 const cut = (props) => {
     return (
         <React.Fragment>
-            <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", marginTop: "50px", marginBottom: "50px", width: "90%" }}>
+            <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", margin: "20px"}}>
                 <Grid container justify="center" alignItems="center">
                     <h1>Select Cut Length</h1>
                 </Grid>

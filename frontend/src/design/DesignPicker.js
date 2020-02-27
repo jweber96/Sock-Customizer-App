@@ -1,7 +1,6 @@
 import React from "react"
 import { Grid, Button } from "@material-ui/core";
 import { connect } from "react-redux";
-//import { NavLink } from "react-router-dom";
 import { inputDesign } from "./DesignActions";
 import "typeface-roboto";
 
@@ -13,14 +12,14 @@ const designPicker = (props) => {
 
     return (
         <React.Fragment>
-            <Grid>
-                <Grid item>
+            <Grid key={props.key}>
+                <Grid item container>
                     <h2>{props.data.name}</h2>
                 </Grid>
-                <Grid item>
+                <Grid>
                     <img width={150} height={150} src={props.data.image} alt={props.data.description} />
                 </Grid>
-                <Grid item>
+                <Grid>
                     <Button variant="contained" size="large" color="secondary" disabled={true}>UNAVAILABLE</Button>
                     {/* <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button> */}
                 </Grid>
@@ -31,6 +30,7 @@ const designPicker = (props) => {
 
 const mapStateToProps = (state, props) => {
     return {
+        key: props.key,
         design: state.design.design,
         data: props.data
     };

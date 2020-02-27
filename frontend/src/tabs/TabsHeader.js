@@ -24,6 +24,8 @@ const tabsHeader = (props) => {
                     onChange={handleChange}
                     indicatorColor="primary"
                     textColor="primary"
+                    variant="standard"
+                    scrollButtons="on"
                     centered
                 >
                     <Tab label="Design" />

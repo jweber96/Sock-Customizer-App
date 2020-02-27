@@ -9,12 +9,10 @@ const design = (props) => {
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center" style={{ backgroundColor: '#eff0f1', paddingBottom: 20 }}>
                 <h1>Select Design</h1>
-                <Grid container direction="row" justify="center" alignItems="center" >
+                <Grid container direction="row" justify="space-around" alignItems="center" >
                     {<DesignPicker data={props.designs[0]} />}
                     {<DesignPicker data={props.designs[1]} />}
                     {<DesignPicker data={props.designs[2]} />}
-                </Grid>
-                <Grid container direction="row" justify="center" alignItems="center" >
                     {<DesignPicker data={props.designs[3]} />}
                     {<DesignPicker data={props.designs[4]} />}
                     {<DesignPicker data={props.designs[5]} />}

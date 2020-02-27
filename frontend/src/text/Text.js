@@ -53,21 +53,26 @@ const text = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-            <h1>Add Text</h1>
-            <TextField label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
-            <StyledTextContainer label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
-            {
-                !canShowDelete()
-                ? (
-                    <IconButton disabled>
-                        <DeleteIcon fontSize="large" />
-                    </IconButton>
-                ) : (
-                    <IconButton onClick={handleReset}>
-                        <DeleteIcon fontSize="large" />
-                    </IconButton>
-                )
-            }
+                <Grid item style={{padding: "8px"}}>
+                    <TextField label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
+                </Grid>
+                <Grid item style={{padding: "8px"}}>
+                    <TextField label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
+                </Grid>
+                <Grid item>
+                    {
+                        !canShowDelete()
+                        ? (
+                            <IconButton disabled>
+                                <DeleteIcon fontSize="large" />
+                            </IconButton>
+                        ) : (
+                            <IconButton onClick={handleReset}>
+                                <DeleteIcon fontSize="large" />
+                            </IconButton>
+                        )
+                    }
+                </Grid>
             </Grid>
         </React.Fragment>
     );

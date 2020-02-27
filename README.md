@@ -1,5 +1,4 @@
-## ** Sock-Customizer README **
-
+**Sock Customizer**
 1. Clone the repo either by downloading a zip from https://github.com/my1124/Sock-Customizer.git 
 or by typing the following into your termainl - git clone https://github.com/my1124/Sock-Customizer.git
 

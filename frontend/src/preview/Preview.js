@@ -26,7 +26,7 @@ const preview = (props) => {
 
     return (
         <React.Fragment>
-            <object id="preview" type="image/svg+xml" data={props.cut.cut.image} width="25%" height="25%" onLoad={setPreview} style={{minWidth: 500, minHeight: 500}}>
+            <object id="preview" type="image/svg+xml" data={props.cut.cut.image} onLoad={setPreview} style={{width: "100%", height: "100%"}}>
                 {props.cut.cut.description}
             </object>
         </React.Fragment>

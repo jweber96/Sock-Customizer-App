@@ -8,7 +8,7 @@ import "typeface-roboto";
 const colors = () => {
     return (
         <React.Fragment>
-            <Grid container direction="column" justify="center" alignItems="center">
+            <Grid container xs direction="column" justify="center" alignItems="center">
                 <ColorsPicker isPrimary={true} />
                 <ColorsPicker isPrimary={false} />
             </Grid>

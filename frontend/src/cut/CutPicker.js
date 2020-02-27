@@ -2,7 +2,7 @@ import React from "react"
 import { Grid, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { inputCut} from "./CutActions";
+import { inputCut } from "./CutActions";
 import "typeface-roboto";
 
 
@@ -13,7 +13,7 @@ const cutPicker = (props) => {
 
     return (
         <React.Fragment>
-            <div style={{padding: 0}}>
+            <div style={{ padding: 0 }}>
                 <Grid item sm container>
                     <Grid item container direction="column" justify="space-around" alignItems="center" spacing={2}>
                         <Grid item>
@@ -25,20 +25,20 @@ const cutPicker = (props) => {
                         <Grid item>
                             {
                                 props.data.available
-                                ? (
-                                    <NavLink to="/customizer">
-                                        {
-                                            props.cut?.name === props.data.name
-                                            ? (
-                                                <Button variant="contained" size="large" color="secondary">Selected</Button>
-                                            ) : (
-                                                <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
-                                            )
+                                    ? (
+                                        <NavLink to="/customizer">
+                                            {
+                                                props.cut ?.name === props.data.name
+                                                    ? (
+                                                        <Button variant="contained" size="large" color="secondary">Selected</Button>
+                                                    ) : (
+                                                        <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
+                                                    )
                                         }
-                                    </NavLink>
-                                ) : (
-                                    <Button variant="contained" size="large" color="primary" disabled>Unavailable</Button>
-                                )
+                                        </NavLink>
+                                    ) : (
+                                        <Button variant="contained" size="large" color="primary" disabled>Unavailable</Button>
+                                    )
                             }
                         </Grid>
                     </Grid>

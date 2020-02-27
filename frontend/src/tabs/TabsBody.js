@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { Box, Button, Grid } from "@material-ui/core";
+import { Button, Grid, Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import Preview from "../preview/Preview";
 import "typeface-roboto";
@@ -13,24 +13,26 @@ const tabsBody = (props) => {
                 // Breaks tabs for some reason if you use === instead of ==
                 // eslint-disable-next-line eqeqeq
                 props.index == props.value
-                ? (
-                    props.cut.cut != null
                     ? (
-                        <Grid container direction="row" justify="center"alignItems="center">
-                            <Preview />
-                            <Box p="3">{props.children}</Box>
-                        </Grid>
+                        props.cut.cut != null
+                            ? (
+                                <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", marginTop: 50, width: "75%" }}>
+                                    <Grid container direction="row" justify="center" alignItems="center" style={{margin: "20"}}>
+                                        <Grid justify="center" alignItems="center" xs={6}><div>{props.children}</div></Grid>
+                                        <Grid justify="center" alignItems="center" xs={6}><Preview /></Grid>
+                                    </Grid>
+                                </Paper>
+                            ) : (
+                                <React.Fragment>
+                                    <h1>No cut selected!</h1>
+                                    <NavLink to="/">
+                                        <Button variant="contained" size="large" color="primary">Select a cut!</Button>
+                                    </NavLink>
+                                </React.Fragment>
+                            )
                     ) : (
-                        <React.Fragment>
-                            <h1>No cut selected!</h1>
-                            <NavLink to="/">
-                                <Button variant="contained" size="large" color="primary">Select a cut!</Button>
-                            </NavLink>
-                        </React.Fragment>
+                        <></>
                     )
-                ) : (
-                    <></>
-                )
             }
         </React.Fragment>
     );

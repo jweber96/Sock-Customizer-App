@@ -9,16 +9,21 @@ import 'typeface-roboto';
 
 const Container = withStyles({
     root: {
-        marginLeft: 25
+        marginLeft: '20%'
     }
 })(Grid);
 
 const Shift = withStyles({
     root: {
         marginTop: 15,
-        marginBottom: 15
     }
 })(Grid);
+
+const StyledButton = withStyles({
+    root: {
+        width: '20%'
+    }
+})(Button);
 
 class details extends Component {
     constructor(props) {
@@ -81,7 +86,7 @@ class details extends Component {
                     <Address addressErrors={()=>this.setState({isAddress: true})}/>
                     <Sizes/>
                     <Shift>
-                        <Button variant="contained" size="large" color="primary" onClick={()=>this.submitOrder()}>Submit</Button>
+                        <StyledButton variant="contained" size="large" color="primary" onClick={()=>this.submitOrder()}>Submit</StyledButton>
                     </Shift>
                 </Container>
             </React.Fragment>

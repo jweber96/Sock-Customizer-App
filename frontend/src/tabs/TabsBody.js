@@ -4,7 +4,17 @@ import { Button, Grid, Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import Preview from "../preview/Preview";
 import "typeface-roboto";
+import { withStyles } from '@material-ui/core/styles';
 
+const Section = withStyles({
+    root: {
+        backgroundColor: "#eff0f1", 
+        width: '80%', 
+        marginTop: 25, 
+        paddingBottom: 50,
+        marginBottom: 25
+    }
+})(Paper);
 
 const tabsBody = (props) => {
     return (
@@ -16,12 +26,12 @@ const tabsBody = (props) => {
                     ? (
                         props.cut.cut != null
                             ? (
-                                <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", margin: "20px"}}>
+                                <Section variant="outlined">
                                     <Grid container direction="row" justify="center" alignItems="center" style={{margin: "20px"}}>
-                                        <Grid item><div>{props.children}</div></Grid>
-                                        <Grid item><Preview /></Grid>
+                                        <Grid item xs={6}>{props.children}</Grid>
+                                        <Grid item xs={6}><Preview /></Grid>
                                     </Grid>
-                                </Paper>
+                                </Section>
                             ) : (
                                 <React.Fragment>
                                     <h1>No cut selected!</h1>

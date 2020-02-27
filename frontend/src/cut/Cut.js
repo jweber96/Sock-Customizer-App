@@ -3,23 +3,44 @@ import { Grid, Paper } from "@material-ui/core";
 import { connect } from "react-redux";
 import CutPicker from "./CutPicker";
 import "typeface-roboto";
+import { withStyles } from '@material-ui/core/styles';
 
+const Container = withStyles({
+    root: {
+        width: '100%'
+    }
+})(Grid);
+
+const Section = withStyles({
+    root: {
+        backgroundColor: "#eff0f1", 
+        width: '80%', 
+        marginTop: 25, 
+        paddingBottom: 50
+    }
+})(Paper);
+
+const Title = withStyles({
+    root: {
+        marginTop: 20
+    }
+})(Grid);
 
 const cut = (props) => {
     return (
         <React.Fragment>
-            <Paper variant="outlined" square style={{ backgroundColor: "#eff0f1", margin: "20px"}}>
-                <Grid container justify="center" alignItems="center">
+            <Section variant="outlined">
+                <Title container justify="center" alignItems="center">
                     <h1>Select Cut Length</h1>
-                </Grid>
-                <Grid container direction="row" justify="center" alignItems="center" style={{margin: "20px"}}>
+                </Title>
+                <Container container direction="row" justify="space-evenly" alignItems="center">
                     {
                         Object.keys(props.cuts).map((index) => (
                             <CutPicker data={props.cuts[index]} key={index} />
                         ))
                     }
-                </Grid>
-            </Paper>
+                </Container>
+            </Section>
         </React.Fragment>
     );
 }

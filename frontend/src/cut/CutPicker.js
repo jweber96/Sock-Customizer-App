@@ -4,7 +4,13 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { inputCut } from "./CutActions";
 import "typeface-roboto";
+import { withStyles } from '@material-ui/core/styles';
 
+const Container = withStyles({
+    root: {
+        marginBottom: 25
+    }
+})(Grid);
 
 const cutPicker = (props) => {
     const handleClick = (cut) => {
@@ -13,35 +19,32 @@ const cutPicker = (props) => {
 
     return (
         <React.Fragment>
-            <Grid item>
+            <Container item>
                 <Grid container direction="column" justify="space-around" alignItems="center">
                     <Grid item>
-                        <h2>{props.data.name} - ${props.data.price}</h2>
+                        <h2 style={{textAlign: 'center'}}>{props.data.name}</h2>
+                        <h2 style={{textAlign: 'center', color: '#585858'}}>${props.data.price}</h2>
                     </Grid>
-                    <Grid item>
-                        <img width={200} height={200} src={props.data.image} alt={props.data.description} />
-                    </Grid>
-                    <Grid item>
-                        {
-                            props.data.available
-                            ? (
-                                <NavLink to="/customizer">
-                                    {
-                                        props.cut ?.name === props.data.name
-                                            ? (
-                                                <Button variant="contained" size="large" color="secondary">Selected</Button>
-                                            ) : (
-                                                <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
-                                            )
-                                }
-                                </NavLink>
-                            ) : (
-                                <Button variant="contained" size="large" color="primary" disabled>Unavailable</Button>
-                            )
-                        }
-                    </Grid>
+                    <img width={200} height={200} src={props.data.image} alt={props.data.description} />
+                    {
+                        props.data.available
+                        ? (
+                            <NavLink to="/customizer">
+                                {
+                                    props.cut ?.name === props.data.name
+                                        ? (
+                                            <Button variant="contained" size="large" color="secondary">Selected</Button>
+                                        ) : (
+                                            <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
+                                        )
+                            }
+                            </NavLink>
+                        ) : (
+                            <Button variant="contained" size="large" color="primary" disabled>Unavailable</Button>
+                        )
+                    }
                 </Grid>
-            </Grid>
+            </Container>
         </React.Fragment>
     );
 }

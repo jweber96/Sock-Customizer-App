@@ -52,7 +52,7 @@ class address extends Component {
         const { isZip } = this.state;
         return (
             <React.Fragment>
-                <Typography variant="subtitle1">Address</Typography>
+                <Typography variant="subtitle1">Shipping Address</Typography>
                 <Grid item xs={8}>
                     <Input label="Street" required={true} value={this.props.street1 || ""} onChange={this.handleStreet1Text}/>
                 </Grid>

@@ -7,7 +7,7 @@ import "typeface-roboto";
 const design = (props) => {
     return (
         <React.Fragment>
-            <Grid container direction="column" justify="center" alignItems="center" style={{ backgroundColor: '#eff0f1'}}>
+            <Grid container direction="column" justify="center" alignItems="center">
                 <h1>Select Design</h1>
                 <Grid container >
                     <DesignPicker data={props.designs[0]} key={0} />

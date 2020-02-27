@@ -8,7 +8,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const StyledTextContainer = withStyles({
     root: {
-        marginTop: 15
+        marginTop: 15,
+        width: '45%'
     }
 })(TextField);
 
@@ -54,12 +55,8 @@ const text = (props) => {
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
                 <h1>Add Text</h1>
-                <Grid item style={{padding: "8px"}}>
-                    <TextField label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
-                </Grid>
-                <Grid item style={{padding: "8px"}}>
-                    <TextField label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
-                </Grid>
+                <StyledTextContainer label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
+                <StyledTextContainer label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
                 <Grid item>
                     {
                         !canShowDelete()

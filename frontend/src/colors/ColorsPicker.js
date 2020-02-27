@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { Grid, IconButton } from "@material-ui/core";
+import { GridList, GridListTile, IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
@@ -79,30 +79,32 @@ const colorsPicker = (props) => {
             {
                 props.isPrimary
                 ? (
-                    <div>
+                    <React.Fragment>
                         <h1>Primary Colors</h1>
                         <p>{props.primaryColor || "No color picked!"}</p>
-                    </div>
+                    </React.Fragment>
                 ) : (
-                    <div>
+                    <React.Fragment>
                         <h1>Secondary Colors</h1>
                         <p>{props.secondaryColor || "No color picked!"}</p>
-                    </div>
+                    </React.Fragment>
                 )
             }
-            <Grid container direction="row" justify="center" alignItems="center" cols={13}>
-                {
-                    Object.keys(props.colors).map((color, index) => (
-                        <Grid item key={index}>
-                            <svg width="32" height="32">
-                            <circle id={props.isPrimary ? "primary_" + color : "secondary_" + color} cx="16" cy="16" r="15" stroke="black" strokeWidth="2" onClick={handlePick} fill={props.colors[color]}>
-                                    <title>{color}</title>
-                                </circle>
-                            </svg>
-                        </Grid>
-                    ))
-                }
-            </Grid>
+            <div style={{width: "500px"}}>
+                <GridList cellHeight={32} cols={13} spacing={5}>
+                    {
+                        Object.keys(props.colors).map((color, index) => (
+                            <GridListTile key={index}>
+                                <svg width="32" height="32">
+                                <circle id={props.isPrimary ? "primary_" + color : "secondary_" + color} cx="16" cy="16" r="15" stroke="black" strokeWidth="2" onClick={handlePick} fill={props.colors[color]}>
+                                        <title>{color}</title>
+                                    </circle>
+                                </svg>
+                            </GridListTile>
+                        ))
+                    }
+                </GridList>
+            </div>
             {
                 !canShowDelete()
                 ? (

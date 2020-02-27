@@ -1,4 +1,4 @@
-# ** Sock-Customizer README **
+## ** Sock-Customizer README **
 
 1. Clone the repo either by downloading a zip from https://github.com/my1124/Sock-Customizer.git 
 or by typing the following into your termainl - git clone https://github.com/my1124/Sock-Customizer.git
@@ -17,6 +17,6 @@ pip install -r requirements.txt
 7. To run the React web app, cd into the frontend directory and type the following into your terminal - 
 yarn start
 
-7a. If you dont have yarn installed on your machine, you can install Yarn (https://brew.sh/) through the Homebrew package manager by typing the following into the terminal - brew install yarn
+    7a. If you don't have yarn installed on your machine, you can install Yarn (https://brew.sh/) through the Homebrew package manager by typing the following into the terminal - brew install yarn
 
-7b. Open http://localhost:3000/ and you are good to go!
+    7b. Open http://localhost:3000/ and you are good to go!

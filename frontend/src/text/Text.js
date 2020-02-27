@@ -53,6 +53,7 @@ const text = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
+                <h1>Add Text</h1>
                 <Grid item style={{padding: "8px"}}>
                     <TextField label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
                 </Grid>

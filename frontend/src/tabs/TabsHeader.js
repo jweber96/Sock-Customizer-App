@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { AppBar, Tab, Tabs } from "@material-ui/core";
 import { clickTab } from "./TabsActions";
 import TabBody from "./TabsBody";
-import Design from "../design/Design";
 import Colors from "../colors/Colors";
 import Text from "../text/Text";
 import Logo from "../logo/Logo";
@@ -28,7 +27,6 @@ const tabsHeader = (props) => {
                     scrollButtons="on"
                     centered
                 >
-                    <Tab label="Design" />
                     <Tab label="Colors"  />
                     <Tab label="Text" />
                     <Tab label="Logo" />
@@ -36,18 +34,15 @@ const tabsHeader = (props) => {
                 </Tabs>
             </AppBar>
             <TabBody index="0">
-                <Design />
-            </TabBody>
-            <TabBody index="1">
                 <Colors />
             </TabBody>
-            <TabBody index="2">
+            <TabBody index="1">
                 <Text />
             </TabBody>
-            <TabBody index="3">
+            <TabBody index="2">
                 <Logo />
             </TabBody>
-            <TabBody index="4">
+            <TabBody index="3">
                 <Details />
             </TabBody>
         </React.Fragment>

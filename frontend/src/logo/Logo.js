@@ -6,12 +6,25 @@ import { inputLogo, resetLogo } from "./LogoActions";
 import "typeface-roboto";
 
 const logo = (props) => {
+    const updatePreview = (image) => {
+        const preview = document.getElementById("preview");
+        if (preview) {
+            const content = preview.contentDocument;
+
+            const logoImage = content.getElementById("logo");
+            logoImage.setAttribute("href", image ?? "");
+        }
+    }
+
     const handleInput = (event) => {
-        props.inputLogo(URL.createObjectURL(event.target.files[0]));
+        const image = URL.createObjectURL(event.target.files[0])
+        props.inputLogo(image);
+        updatePreview(image);
     }
 
     const handleReset = () => {
         props.resetLogo();
+        updatePreview(null);
     }
 
     return (

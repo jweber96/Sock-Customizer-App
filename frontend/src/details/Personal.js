@@ -9,15 +9,6 @@ import {firstName, lastName, organization, phoneNumber, email } from './DetailsA
 class personalInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isEmail: true,
-            isPhoneNumber: true
-        }
-    }
-
-    validateEmail(email) {
-        const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        return valid.test(email);
     }
 
     handleFirstNameText = (event) => {
@@ -33,50 +24,57 @@ class personalInfo extends Component {
     }
     
     handlePhoneNumberText = (event) => {
-        // var cleaned = ('' + event.target.value).replace(/\D/g, '')
-        // var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-        // if (match) {
-        //     var number = ['(', match[2], ') ', match[3], '-', match[4]].join('');
-        //     this.props.phoneNumber(number);
-        //     return null;
-        // }
-        this.setState({isPhoneNumber: event.target.value.length === 10});
         this.props.phoneNumber(event.target.value);
-        this.confirmErrors()
     }
     
     handleEmailText = (event) => {
-        this.setState({isEmail: this.validateEmail(event.target.value)});
         this.props.email(event.target.value);
-        this.confirmErrors()
     }
 
-    confirmErrors = () => {
-        const { isEmail, isPhoneNumber} = this.state
-        if (isEmail && isPhoneNumber) {
-            this.props.personalErrors()
+    getPhoneNumberErrorMessage() {
+        const { isPhoneNumber, isPhoneNumberValid } = this.props;
+        if (!isPhoneNumberValid) {
+            return "Please enter a valid phone number"
+        } 
+        if (!isPhoneNumber) {
+            return "Please enter your phone number"
         }
+
+        return ""
     }
+
+    getEmailErrorMessage() {
+        const { isEmail, isEmailValid } = this.props;
+        if (!isEmailValid) {
+            return "Please enter a valid email"
+        } 
+        if (!isEmail) {
+            return "Please enter your email"
+        }
+
+        return ""
+    }
+
 
     render() {
-        const { isEmail, isPhoneNumber } = this.state
+        const { isFirstName, isLastName, isEmail, isPhoneNumber, isEmailValid, isPhoneNumberValid } = this.props;
         return (
             <React.Fragment>
                 <Typography variant="subtitle1">Personal</Typography>
                 <Grid container direction="row">
                     <Grid item xs={4}>
-                        <Input label="First Name" required={true} value={this.props.firstName || ""} onChange={this.handleFirstNameText}/>
+                        <Input error={isFirstName} helperText={isFirstName ? "" : "Please enter your first name"} label="First Name" required={true} value={this.props.firstName || ""} onChange={this.handleFirstNameText}/>
                     </Grid>
                     <Grid item xs={4}>
-                        <Input label="Last Name" required={true} value={this.props.lastName || ""} onChange={this.handleLastNameText}/>
+                        <Input error={isLastName} helperText={isLastName ? "" : "Please enter your last name"} label="Last Name" required={true} value={this.props.lastName || ""} onChange={this.handleLastNameText}/>
                     </Grid>
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs={4}>
-                        <Input error={isEmail} label="Email" required={true} value={this.props.email || ""} onChange={this.handleEmailText} />
+                        <Input error={isEmailValid && isEmail} helperText={this.getEmailErrorMessage()} label="Email" required={true} value={this.props.email || ""} onChange={this.handleEmailText} />
                     </Grid>
                     <Grid item xs={4}>
-                        <Input error={isPhoneNumber} label="Phone Number" required={true} value={this.props.phoneNumber || ""} onChange={this.handlePhoneNumberText} />
+                        <Input error={isPhoneNumberValid && isPhoneNumber} helperText={this.getPhoneNumberErrorMessage()} label="Phone Number" required={true} value={this.props.phoneNumber || ""} onChange={this.handlePhoneNumberText} />
                     </Grid>
                 </Grid>
             </React.Fragment>

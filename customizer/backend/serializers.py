@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from backend.models import Customer, Order, Sizes, Address
+from django.contrib.auth.models import User
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,14 +13,17 @@ class SizeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CustomerSerializer(serializers.ModelSerializer):
-    address = AddressSerializer()
     class Meta:
         model = Customer
         fields = '__all__'
 
 class OrderSerializer(serializers.ModelSerializer):
-    customer = CustomerSerializer()
-    sizes = SizeSerializer()
     class Meta:
         model = Order
         fields = '__all__'
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+        extra_kwargs = {'password': {'write_only': True}}

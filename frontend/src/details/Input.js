@@ -19,7 +19,7 @@ function Input(props) {
     let error = props.error != undefined ? props.error : true
     return (
       <form className={classes.root} autoComplete="off">
-        <TextField error={!error} fullWidth id="outlined-basic" variant="outlined" label={props.label} onChange={props.onChange} required={props.required}/>
+        <TextField error={!error} fullWidth id="outlined-basic" helperText={props.helperText} variant="outlined" label={props.label} onChange={props.onChange} required={props.required}/>
       </form>
     );
 }

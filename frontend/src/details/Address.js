@@ -6,13 +6,15 @@ import Input from './Input'
 import DropDown from './DropDown'
 import {street1, street2, city, state, zip, country } from './DetailsAction'
 
+const states = ["Alabama","Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois",
+    "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska",
+    "Nevada", "New Hampshire ", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Oklahoma", "Ohio", "Oregon ", "Pennsylvania ", "Rhode Island",
+    "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+
 
 class address extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isZip: true,
-        }
     }
 
     handleStreet1Text = (event) => {
@@ -27,52 +29,55 @@ class address extends Component {
         this.props.city(event.target.value);
     }
     
-    handleStateText = (event) => {
+    handleState = (event) => {
         this.props.state(event.target.value);
     }
     
     handleZipText = (event) => {
-        this.setState({isZip: event.target.value.length === 5});
         this.props.zip(event.target.value);
-        this.confirmErrors()
     }
     
-    handleCountryText = (event) => {
+    handleCountry = (event) => {
         this.props.country(event.target.value);
     }
 
-    confirmErrors = () => {
-        const { isZip } = this.state
-        if (isZip) {
-            this.props.addressErrors()
+    getZipErrorMessage() {
+        const { isZip, isZipValid } = this.props;
+        if (!isZipValid) {
+            return "Please enter a valid zip"
+        } 
+        if (!isZip) {
+            return "Please enter your zip"
         }
+
+        return ""
     }
 
     render() {
-        const { isZip } = this.state;
+        const { isStreet, isCity, isState, isZipValid, isCountry, isZip } = this.props;
         return (
             <React.Fragment>
                 <Typography variant="subtitle1">Shipping Address</Typography>
                 <Grid item xs={8}>
-                    <Input label="Street" required={true} value={this.props.street1 || ""} onChange={this.handleStreet1Text}/>
+                    <Input error={isStreet} helperText={isStreet ? "" : "Please enter your street"} label="Street" required={true} value={this.props.street1 || ""} onChange={this.handleStreet1Text}/>
                 </Grid>
                 <Grid item xs={8}>
                     <Input label="Apt/Suite/Other" required={false} value={this.props.street2 || ""} onChange={this.handleStreet2Text}/>
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs={4}>
-                        <Input label="City" required={true} value={this.props.city || ""} onChange={this.handleCityText}/>
+                        <Input error={isCity} helperText={isCity ? "" : "Please enter your street"} label="City" required={true} value={this.props.city || ""} onChange={this.handleCityText}/>
                     </Grid>
                     <Grid item xs={4}>
-                        <Input label="Zip" required={true} value={this.props.zip || ""} onChange={this.handleZipText} error={isZip}/>
+                        <Input error={isZipValid && isZip} helperText={this.getZipErrorMessage()}  label="Zip Code" required={true} value={this.props.zip || ""} onChange={this.handleZipText} error={isZip} helperText={isZip ? "" : "Please enter a valid zip code"}/>
                     </Grid>
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs={4}>
-                        <Input label="State" required={true} value={this.props.state || ""} onChange={this.handleStateText}/>
+                        <DropDown title="State" options={states} value={this.props.state} onChange={this.handleState}/>
                     </Grid>
                     <Grid item xs={4}>
-                        <DropDown title="Country" option1="United States" onChange={this.handleCountry}/>
+                        <DropDown title="Country" options={["United States"]} value={this.props.country} onChange={this.handleCountry}/>
                     </Grid>
                 </Grid>
             </React.Fragment>

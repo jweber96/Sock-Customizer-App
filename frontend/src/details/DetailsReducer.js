@@ -10,13 +10,13 @@ const initialState = () => {
         street1: null, 
         street2: null,
         city: null, 
-        state: null,
+        state: "Alabama",
         zip: null, 
-        country: null,
-        youth: null,
-        small: null,
-        medium: null,
-        large: null,
+        country: "United States",
+        youth: 0,
+        small: 0,
+        medium: 0,
+        large: 0,
     };
 };
 

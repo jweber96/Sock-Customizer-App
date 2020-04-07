@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import TabsReducer from "./tabs/TabsReducer";
-import DesignReducer from "./design/DesignReducer";
 import ColorsReducer from "./colors/ColorsReducer";
 import TextReducer from "./text/TextReducer";
 import LogoReducer from "./logo/LogoReducer";
@@ -15,7 +14,6 @@ const reducers = () => {
         text: TextReducer,
         logo: LogoReducer,
         cut: CutReducer,
-        design: DesignReducer,
         details: DetailsReducer
     });
 }

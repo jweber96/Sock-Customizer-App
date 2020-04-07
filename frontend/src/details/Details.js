@@ -70,7 +70,7 @@ class details extends Component {
                 zip: this.props.details.zip,
                 country: this.props.details.country,
                 email: this.props.details.email,
-                phone_number: this.props.details.phone_number,
+                phone_number: this.props.details.phoneNumber,
                 youth: this.props.details.youth,
                 small: this.props.details.small,
                 medium: this.props.details.medium,

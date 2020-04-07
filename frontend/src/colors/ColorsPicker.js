@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Component} from "react"
 import { connect } from "react-redux";
 import { GridList, GridListTile, IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -6,55 +6,89 @@ import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
 
 
-const colorsPicker = (props) => {
-    const handlePick = (event) => {
+class colorsPicker extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
+
+
+    handlePick = event => {
         const color = event.target.children[0].innerHTML;
         const code = event.target.attributes.fill.value;
         const id = event.target.id;
-        props.isPrimary ? props.inputPrimaryColor(color, code) : props.inputSecondaryColor(color, code);
-        updateColors(id);
-        updatePreview(code);
+        this.props.isPrimary ? this.props.inputPrimaryColor(color, code) : this.props.inputSecondaryColor(color, code);
+        this.updateColors(id);
+        this.updatePreview(code);
     }
 
-    const handleReset = () => {
+    handleReset = () => {
         var id = "";
-        props.isPrimary ? id = "primary_" + props.primaryColor : id = "secondary_" + props.secondaryColor;
-        normalize(id);
+        this.props.isPrimary ? id = "primary_" + this.props.primaryColor : id = "secondary_" + this.props.secondaryColor;
+        this.normalize(id);
 
-        props.isPrimary ? props.inputPrimaryColor(null, null) : props.inputSecondaryColor(null, null);
-        updatePreview();
+        this.props.isPrimary ? this.props.inputPrimaryColor(null, null) : this.props.inputSecondaryColor(null, null);
+        this.updatePreview();
     }
 
-    const updateColors = (id) => {
+    updateColors = id => {
         var index = "";
-        for (var color in props.colors) {
-            props.isPrimary ? index = "primary_" + color : index = "secondary_" + color;
-            normalize(index);
+        for (var color in this.props.colors) {
+            this.props.isPrimary ? index = "primary_" + color : index = "secondary_" + color;
+            this.normalize(index);
         }
-        identify(id);
+        this.identify(id);
     }
 
-    const normalize = (id) => {
+    pageLoad = () => {
+        var index = "";
+        for (var color in this.props.colors) {
+            this.props.isPrimary ? index = "primary_" + color : index = "secondary_" + color;
+            this.normalize(index);
+        }
+        if (this.props.primaryColor !== null) {
+            console.log("PAGE LOAD p: " + this.props.primaryColor);
+            var id = "primary_" + this.props.primaryColor;
+            console.log("id: " + id);
+            this.identify(id);
+        }
+        if (this.props.secondaryColor !== null) {
+            console.log("PAGE LOAD s: " + this.props.secondaryColor);
+            var id = "secondary_" + this.props.secondaryColor;
+            console.log("id: " + id);
+            this.identify(id);
+        }
+    }
+
+    normalize = id => {
         var selected = document.getElementById(id);
-        selected.style.stroke = "black";
-        selected.style.strokeWidth = "2";
-        selected.style.r = "15";
-        selected.style.fillOpacity = "100%";
+        if (selected !== null) {
+            selected.style.stroke = "black";
+            selected.style.strokeWidth = "2";
+            selected.style.r = "15";
+            selected.style.fillOpacity = "100%";
+        }
     }
 
-    const identify = (id) => {
+    identify = id => {
+        console.log("id: " + id);
         var selected = document.getElementById(id);
-        selected.style.stroke = "red";
-        selected.style.strokeWidth = "4";
-        selected.style.r = "14";
-        selected.style.fillOpacity = "80%";
+        console.log("document: " + document);
+        console.log("selected: " + selected);
+        if (selected !== null) {
+            selected.style.stroke = "red";
+            selected.style.strokeWidth = "4";
+            selected.style.r = "14";
+            selected.style.fillOpacity = "80%";
+        }
     }
 
-    const updatePreview = (code) => {
+    updatePreview = code => {
         const preview = document.getElementById("preview");
         if (preview) {
             const document = preview.contentDocument;
-            if (props.isPrimary) {
+            if (this.props.isPrimary) {
                 const primaryColor = document.getElementById("primaryColor");
                 primaryColor.style.fill = code || "#000000";
             } else {
@@ -70,55 +104,60 @@ const colorsPicker = (props) => {
         }
     }
 
-    const canShowDelete = () => {
-        return props.isPrimary ? props.primaryColor !== null : props.secondaryColor !== null;
+    canShowDelete = () => {
+        return this.props.isPrimary ? this.props.primaryColor !== null : this.props.secondaryColor !== null;
     }
 
-    return (
-        <React.Fragment>
-            {
-                props.isPrimary
-                ? (
-                    <React.Fragment>
-                        <h1>Primary Colors</h1>
-                        <p>{props.primaryColor || "No color picked!"}</p>
-                    </React.Fragment>
-                ) : (
-                    <React.Fragment>
-                        <h1>Secondary Colors</h1>
-                        <p>{props.secondaryColor || "No color picked!"}</p>
-                    </React.Fragment>
-                )
-            }
-            <div style={{width: "500px"}}>
-                <GridList cellHeight={32} cols={13} spacing={5}>
-                    {
-                        Object.keys(props.colors).map((color, index) => (
-                            <GridListTile key={index}>
-                                <svg width="32" height="32">
-                                <circle id={props.isPrimary ? "primary_" + color : "secondary_" + color} cx="16" cy="16" r="15" stroke="black" strokeWidth="2" onClick={handlePick} fill={props.colors[color]}>
-                                        <title>{color}</title>
-                                    </circle>
-                                </svg>
-                            </GridListTile>
-                        ))
-                    }
-                </GridList>
-            </div>
-            {
-                !canShowDelete()
-                ? (
-                    <IconButton disabled>
-                        <DeleteIcon fontSize="large" />
-                    </IconButton>
-                ) : (
-                    <IconButton onClick={handleReset}>
-                        <DeleteIcon fontSize="large" />
-                    </IconButton>
-                )
-            }
-        </React.Fragment>
-    );
+    componentDidMount(){
+        this.pageLoad()
+    };
+    render() {
+        return (
+            <React.Fragment>
+                {
+                    this.props.isPrimary
+                    ? (
+                        <React.Fragment>
+                            <h1>Primary Colors</h1>
+                            <p>{this.props.primaryColor || "No color picked!"}</p>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <h1>Secondary Colors</h1>
+                            <p>{this.props.secondaryColor || "No color picked!"}</p>
+                        </React.Fragment>
+                    )
+                }
+                <div style={{width: "500px"}}>
+                    <GridList cellHeight={32} cols={13} spacing={5}>
+                        {
+                            Object.keys(this.props.colors).map((color, index) => (
+                                <GridListTile key={index}>
+                                    <svg width="32" height="32">
+                                    <circle id={this.props.isPrimary ? "primary_" + color : "secondary_" + color} cx="16" cy="16" r="15" stroke="black" strokeWidth="2" onClick={this.handlePick} fill={this.props.colors[color]}>
+                                            <title>{color}</title>
+                                        </circle>
+                                    </svg>
+                                </GridListTile>
+                            ))
+                        }
+                    </GridList>
+                </div>
+                {
+                    !this.canShowDelete()
+                    ? (
+                        <IconButton disabled>
+                            <DeleteIcon fontSize="large" />
+                        </IconButton>
+                    ) : (
+                        <IconButton onClick={this.handleReset}>
+                            <DeleteIcon fontSize="large" />
+                        </IconButton>
+                    )
+                }
+            </React.Fragment>
+        );
+    };
 }
 
 const mapStateToProps = (state, props) => {

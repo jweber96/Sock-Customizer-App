@@ -51,4 +51,5 @@
    <text id="brimText" x="375" y="200" dominant-baseline="middle" text-anchor="middle" transform="rotate(0 0 0)" fill="black" font-size="22"></text>
    <text id="toeText" x="530" y="350" dominant-baseline="middle" text-anchor="middle" transform="rotate(25 0 0)" fill="black" font-size="22"></text>
   </g>
+  <image href="" id="logo" x="340" y="250" width="75" height="75" />
 </svg>

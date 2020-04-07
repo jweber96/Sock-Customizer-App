@@ -6,21 +6,24 @@ const preview = (props) => {
     const setPreview = () => {
         const preview = document.getElementById("preview");
         if (preview) {
-            const document = preview.contentDocument;
+            const content = preview.contentDocument;
 
-            const primaryColor = document.getElementById("primaryColor");
+            const primaryColor = content.getElementById("primaryColor");
             primaryColor.style.fill = props.colors.primaryColorCode || "#000000";
 
-            const secondaryColor = document.getElementById("secondaryColor");
+            const secondaryColor = content.getElementById("secondaryColor");
             secondaryColor.style.fill = props.colors.secondaryColorCode || "#000000";
 
-            const toeText = document.getElementById("toeText");
+            const toeText = content.getElementById("toeText");
             toeText.innerHTML = props.text.toeText || "";
             toeText.style.fill = props.colors.secondaryColorCode || "#000000";
 
-            const brimText = document.getElementById("brimText");
+            const brimText = content.getElementById("brimText");
             brimText.innerHTML = props.text.brimText || "";
             brimText.style.fill = props.colors.secondaryColorCode || "#000000";
+
+            const logo = content.getElementById("logo");
+            logo.setAttribute("href", props.logo.logo ?? "");
         }
     }
 

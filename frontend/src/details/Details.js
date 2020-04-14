@@ -48,18 +48,18 @@ class details extends Component {
             customerId: -1,
             orderId: -1
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this); //Used for email functionality
+        this.handleSubmit = this.handleSubmit.bind(this); //Used for email functionality
     }
 
+    //Email functionality START. See Developer's Instruction Manual for more details
     handleChange(event) {
         this.setState({ feedback: event.target.value })
     }
 
     handleSubmit(event) {
-        const templateId = 'template_sD1dx3I6';
 
-        this.sendFeedback(templateId,
+        this.sendForm(
             {
                 first_name: this.props.details.firstName,
                 last_name: this.props.details.lastName,
@@ -82,12 +82,24 @@ class details extends Component {
                 logo: this.props.logo.inputLogo,
                 added_at: moment(),
                 cut: this.props.cut.cut.name,
+                order_id: this.state.orderId,
+                customer_id: this.state.customerId
             })
     }
 
-    sendFeedback(templateId, variables) {
+    sendForm(variables) {
+        //Sends email to company email
         window.emailjs.send(
-            'default_service', templateId,
+            'default_service', "template_sD1dx3I6",
+            variables
+        ).then(res => {
+            console.log('Email successfully sent!')
+        })
+            // Handle errors here however you like, or use a React error boundary
+            .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+        //Sends email to customer
+        window.emailjs.send(
+            'default_service', "template_sD1dx3I6_clone",
             variables
         ).then(res => {
             console.log('Email successfully sent!')
@@ -95,6 +107,7 @@ class details extends Component {
             // Handle errors here however you like, or use a React error boundary
             .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
     }
+    //Email functionality END
 
     validateEmail(email) {
         const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -237,6 +250,7 @@ class details extends Component {
                 this.postUser()
             }
 
+            //Validate information is filled out before sending email 
             if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid && isZipValid && isState && isStreet) {
                 this.handleSubmit()
             }

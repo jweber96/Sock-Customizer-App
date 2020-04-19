@@ -187,7 +187,7 @@ class details extends Component {
     }
 
     postUser = async () => {
-        const res0 = await fetch('http://127.0.0.1:8000/api/existing-user/?email=' + this.props.details.email, {
+        const res0 = await fetch('/api/existing-user/?email=' + this.props.details.email, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -204,7 +204,7 @@ class details extends Component {
                 "password": uuid()
             }
 
-            const res = await fetch('http://127.0.0.1:8000/api/users/', {
+            const res = await fetch('/api/users/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
@@ -224,7 +224,7 @@ class details extends Component {
             "added_at": moment()
         }
 
-        const res = await fetch('http://127.0.0.1:8000/api/customers/', {
+        const res = await fetch('/api/customers/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(customer)
@@ -248,7 +248,7 @@ class details extends Component {
             "country": this.props.details.country
         }
 
-        await fetch('http://127.0.0.1:8000/api/addresses/', {
+        await fetch('/api/addresses/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(address)
@@ -267,7 +267,7 @@ class details extends Component {
             "logo": this.props.logo.inputLogo,
             "added_at": moment()
         }
-        const res = await fetch('http://127.0.0.1:8000/api/orders/', {
+        const res = await fetch('/api/orders/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(order)
@@ -285,7 +285,7 @@ class details extends Component {
             "medium": this.props.details.medium,
             "large": this.props.details.large,
         }
-        const res = await fetch('http://127.0.0.1:8000/api/sizes/', {
+        const res = await fetch('/api/sizes/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(sizes)

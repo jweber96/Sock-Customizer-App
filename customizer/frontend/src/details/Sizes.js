@@ -44,10 +44,10 @@ class address extends Component {
                     <Grid item xs={2}>
                         <Input label="Large" required={false} value={this.props.large} onChange={this.handleLargeText}/>
                     </Grid>
-                    <Grid item>
-                        {!this.props.isSizes && <FormHelperText error>You must order at least 5 socks</FormHelperText>}
-                    </Grid>
                 </Grid>  
+                <Grid item>
+                    {!this.props.isSizes && <FormHelperText error>You must order at least 5 socks</FormHelperText>}
+                </Grid>
             </React.Fragment>
         );
     }

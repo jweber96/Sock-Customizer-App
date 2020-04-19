@@ -14,10 +14,8 @@ const body = () => {
         <React.Fragment>
             <Router>
                 <Switch>
-                    <Route path="/" exact component={Cut}>
-                    </Route>
-                    <Route path="/customizer" exact component={TabHeader}>
-                    </Route>
+                    <Route path="/" exact component={Cut}/>
+                    <Route path="/customizer" exact component={TabHeader}/>
                 </Switch>
             </Router>
         </React.Fragment>

@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import 'typeface-roboto';
 import { Typography, Grid } from '@material-ui/core';
 import Input from './Input'
-import {firstName, lastName, organization, phoneNumber, email } from './DetailsAction'
-
+import { inputFirstName, inputLastName, inputPhoneNumber, inputEmail } from './DetailsAction'
 
 class personalInfo extends Component {
     constructor(props) {
@@ -12,23 +11,19 @@ class personalInfo extends Component {
     }
 
     handleFirstNameText = (event) => {
-        this.props.firstName(event.target.value);
+        this.props.inputFirstName(event.target.value);
     }
     
     handleLastNameText = (event) => {
-        this.props.lastName(event.target.value);
-    }
-    
-    handleOrganizationText = (event) => {
-        this.props.organization(event.target.value);
+        this.props.inputLastName(event.target.value);
     }
     
     handlePhoneNumberText = (event) => {
-        this.props.phoneNumber(event.target.value);
+        this.props.inputPhoneNumber(event.target.value);
     }
     
     handleEmailText = (event) => {
-        this.props.email(event.target.value);
+        this.props.inputEmail(event.target.value);
     }
 
     getPhoneNumberErrorMessage() {
@@ -55,12 +50,11 @@ class personalInfo extends Component {
         return ""
     }
 
-
     render() {
         const { isFirstName, isLastName, isEmail, isPhoneNumber, isEmailValid, isPhoneNumberValid } = this.props;
         return (
             <React.Fragment>
-                <Typography variant="subtitle1">Personal</Typography>
+                <Typography variant="h6">Your Information</Typography>
                 <Grid container direction="row">
                     <Grid item xs={4}>
                         <Input error={isFirstName} helperText={isFirstName ? "" : "Please enter your first name"} label="First Name" required={true} value={this.props.firstName || ""} onChange={this.handleFirstNameText}/>
@@ -84,19 +78,19 @@ class personalInfo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        firstName: state.text.firstName,
-        lastName: state.text.lastName,
-        email: state.text.email,
-        phoneNumber: state.text.phoneNumber
+        firstName: state.details.firstName,
+        lastName: state.details.lastName,
+        email: state.details.email,
+        phoneNumber: state.details.phoneNumber
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        firstName: (text) => dispatch(firstName(text)),
-        lastName: (text) => dispatch(lastName(text)),
-        email: (text) => dispatch(email(text)), 
-        phoneNumber: (text) => dispatch(phoneNumber(text))
+        inputFirstName: (text) => dispatch(inputFirstName(text)),
+        inputLastName: (text) => dispatch(inputLastName(text)),
+        inputEmail: (text) => dispatch(inputEmail(text)), 
+        inputPhoneNumber: (text) => dispatch(inputPhoneNumber(text))
     };
 }
 

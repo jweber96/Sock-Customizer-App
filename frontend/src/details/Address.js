@@ -4,7 +4,7 @@ import 'typeface-roboto';
 import { Typography, Grid } from '@material-ui/core';
 import Input from './Input'
 import DropDown from './DropDown'
-import {street1, street2, city, state, zip, country } from './DetailsAction'
+import { inputStreet1, inputStreet2, inputCity, inputState, inputZip, inputCountry } from './DetailsAction'
 
 const states = ["Alabama","Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois",
     "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska",
@@ -12,98 +12,92 @@ const states = ["Alabama","Alaska", "Arizona", "Arkansas", "California", "Colora
     "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
 
-class address extends Component {
-    constructor(props) {
-        super(props);
+const address = (props) => {
+    const { isStreet, isCity, isState, isZipValid, isCountry, isZip } = props;
+
+    const handleStreet1Text = (event) => {
+        props.inputStreet1(event.target.value);
+    }
+    
+    const handleStreet2Text = (event) => {
+        props.inputStreet2(event.target.value);
+    }
+    
+    const handleCityText = (event) => {
+        props.inputCity(event.target.value);
+    }
+    
+    const handleState = (event) => {
+        props.inputState(event.target.value);
+    }
+    
+    const handleZipText = (event) => {
+        props.inputZip(event.target.value);
+    }
+    
+    const handleCountry = (event) => {
+        props.inputCountry(event.target.value);
     }
 
-    handleStreet1Text = (event) => {
-        this.props.street1(event.target.value);
-    }
-    
-    handleStreet2Text = (event) => {
-        this.props.street2(event.target.value);
-    }
-    
-    handleCityText = (event) => {
-        this.props.city(event.target.value);
-    }
-    
-    handleState = (event) => {
-        this.props.state(event.target.value);
-    }
-    
-    handleZipText = (event) => {
-        this.props.zip(event.target.value);
-    }
-    
-    handleCountry = (event) => {
-        this.props.country(event.target.value);
-    }
-
-    getZipErrorMessage() {
-        const { isZip, isZipValid } = this.props;
+    const getZipErrorMessage = () => {
+        const { isZip, isZipValid } = props;
         if (!isZipValid) {
             return "Please enter a valid zip"
         } 
         if (!isZip) {
             return "Please enter your zip"
         }
-
         return ""
     }
 
-    render() {
-        const { isStreet, isCity, isState, isZipValid, isCountry, isZip } = this.props;
-        return (
-            <React.Fragment>
-                <Typography variant="subtitle1">Shipping Address</Typography>
-                <Grid item xs={8}>
-                    <Input error={isStreet} helperText={isStreet ? "" : "Please enter your street"} label="Street" required={true} value={this.props.street1 || ""} onChange={this.handleStreet1Text}/>
+    return (
+        <React.Fragment>
+            <Typography variant="h6">Shipping Address</Typography>
+            <Grid item xs={8}>
+                <Input error={isStreet} helperText={isStreet ? "" : "Please enter your street"} label="Street" required={true} value={props.street1 || ""} onChange={handleStreet1Text}/>
+            </Grid>
+            <Grid item xs={8}>
+                <Input label="Apt/Suite/Other" required={false} value={props.street2 || ""} onChange={handleStreet2Text}/>
+            </Grid>
+            <Grid container direction="row">
+                <Grid item xs={4}>
+                    <Input error={isCity} helperText={isCity ? "" : "Please enter your city"} label="City" required={true} value={props.city || ""} onChange={handleCityText}/>
                 </Grid>
-                <Grid item xs={8}>
-                    <Input label="Apt/Suite/Other" required={false} value={this.props.street2 || ""} onChange={this.handleStreet2Text}/>
+                <Grid item xs={4}>
+                    <Input error={isZipValid && isZip} helperText={getZipErrorMessage()}  label="Zip Code" required={true} value={props.zip || ""} onChange={handleZipText} error={isZip} helperText={isZip ? "" : "Please enter a valid zip code"}/>
                 </Grid>
-                <Grid container direction="row">
-                    <Grid item xs={4}>
-                        <Input error={isCity} helperText={isCity ? "" : "Please enter your street"} label="City" required={true} value={this.props.city || ""} onChange={this.handleCityText}/>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Input error={isZipValid && isZip} helperText={this.getZipErrorMessage()}  label="Zip Code" required={true} value={this.props.zip || ""} onChange={this.handleZipText} error={isZip} helperText={isZip ? "" : "Please enter a valid zip code"}/>
-                    </Grid>
+            </Grid>
+            <Grid container direction="row">
+                <Grid item xs={4}>
+                    <DropDown title="State" options={states} value={props.state} onChange={handleState}/>
                 </Grid>
-                <Grid container direction="row">
-                    <Grid item xs={4}>
-                        <DropDown title="State" options={states} value={this.props.state} onChange={this.handleState}/>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <DropDown title="Country" options={["United States"]} value={this.props.country} onChange={this.handleCountry}/>
-                    </Grid>
+                <Grid item xs={4}>
+                    <DropDown title="Country" options={["United States"]} value={props.country} onChange={handleCountry}/>
                 </Grid>
-            </React.Fragment>
-        );
-    }
+            </Grid>
+        </React.Fragment>
+    );
 }
 
 const mapStateToProps = (state) => {
     return {
-        street1: state.text.street1,
-        street2: state.text.street2,
-        city: state.text.city,
-        zip: state.text.zip,
-        state: state.text.state,
-        country: state.text.country
+        street1: state.details.street1,
+        street2: state.details.street2,
+        city: state.details.city,
+        zip: state.details.zip,
+        state: state.details.state,
+        country: state.details.country
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        street1: (text) => dispatch(street1(text)),
-        street2: (text) => dispatch(street2(text)),
-        city: (text) => dispatch(city(text)), 
-        zip: (text) => dispatch(zip(text)),
-        state: (text) => dispatch(state(text)),
-        country: (text) => dispatch(country(text))
+        inputStreet1: (text) => dispatch(inputStreet1(text)),
+        inputStreet2: (text) => dispatch(inputStreet2(text)),
+        inputCity: (text) => dispatch(inputCity(text)), 
+        inputZip: (text) => dispatch(inputZip(text)),
+        inputState: (text) => dispatch(inputState(text)),
+        inputCountry: (text) => dispatch(inputCountry(text))
     };
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux";
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Typography, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import PersonalInfo from './Personal'
 import Address from './Address'
@@ -12,21 +12,39 @@ const { uuid } = require('uuidv4');
 
 const Container = withStyles({
     root: {
-        marginLeft: '20%'
+        marginLeft: '18%'
     }
 })(Grid);
 
 const Shift = withStyles({
     root: {
-        marginTop: 15,
+        marginTop: 20,
     }
 })(Grid);
 
+const Header = withStyles({
+    root: {
+        fontWeight: 'bold',
+    }
+})(Typography);
+
 const StyledButton = withStyles({
     root: {
-        width: '20%'
-    }
+        width: '20%',
+        marginRight: 15
+    },
+    label: {
+        color: 'white',
+    },
 })(Button);
+
+const StyledDivider = withStyles({
+    root: {
+        width: '75%',
+        marginBottom: 10,
+        marginTop: 10
+    },
+})(Divider);
 
 class details extends Component {
     constructor(props) {
@@ -44,9 +62,11 @@ class details extends Component {
             isZip: true,
             isZipValid: true,
             isCountry: true,
+            isSizes: true,
             userId: -1,
             customerId: -1,
-            orderId: -1
+            orderId: -1,
+            page: 0
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -119,25 +139,68 @@ class details extends Component {
         return false;
     }
 
-    postUser = async () => {
-        let user = {
-            'is_superuser': false,
-            'username': this.props.details.email,
-            'first_name': this.props.details.firstName,
-            'last_name': this.props.details.lastName,
-            'email': this.props.details.email,
-            'is_staff': false,
-            'is_active': false,
-            "password": uuid()
+    getTotalNoOfSizes() {
+        let youth = 0;
+        let small = 0;
+        let medium = 0;
+        let large = 0;
+        if (this.props.details.youth === "") {
+            youth = 0
+        } else {
+            youth = parseInt(this.props.details.youth) 
         }
+        if (this.props.details.small === "") {
+            small = 0
+        } else {
+            small = parseInt(this.props.details.small)
+        }
+        if (this.props.details.medium === "") {
+            medium = 0
+        } else {
+            medium = parseInt(this.props.details.medium)
+        }
+        if (this.props.details.large === "") {
+            large = 0
+        } else {
+            large = parseInt(this.props.details.large)
+        }
+        let total = youth + small + medium + large;
+        return total
+    }
 
-        const res = await fetch('http://127.0.0.1:8000/api/users/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
+    validateSizes() {
+        let total = this.getTotalNoOfSizes()
+        return total >= 5;
+    }
+
+    postUser = async () => {
+        const res0 = await fetch('http://127.0.0.1:8000/api/existing-user/?email=' + this.props.details.email, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
         })
-        const jsonRes = await res.json()
-        this.setState({ userId: jsonRes.id }, async () => this.postCustomer())
+        const userRes = await res0.json()
+        if (userRes.id === -1) {
+            let user = {
+                'is_superuser': false,
+                'username': this.props.details.email,
+                'first_name': this.props.details.firstName,
+                'last_name': this.props.details.lastName,
+                'email': this.props.details.email,
+                'is_staff': false,
+                'is_active': false,
+                "password": uuid()
+            }
+
+            const res = await fetch('http://127.0.0.1:8000/api/users/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            })
+            const jsonRes = await res.json()
+            this.setState({ userId: jsonRes.id }, async () => this.postCustomer())
+        } else {
+            this.setState({userId: userRes.id}, async() => this.postCustomer())
+        }
     }
 
     postCustomer = async () => {
@@ -209,61 +272,245 @@ class details extends Component {
             "medium": this.props.details.medium,
             "large": this.props.details.large,
         }
-        await fetch('http://127.0.0.1:8000/api/sizes/', {
+        const res = await fetch('http://127.0.0.1:8000/api/sizes/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(sizes)
         })
+        if (res.status === 200 || res.status === 201) {
+            this.setState({page: 2})
+        }
     }
 
-    submitOrder = async () => {
+    submitOrder = async (type) => {
         this.setState({
-            isFirstName: this.props.details.firstName !== null,
-            isLastName: this.props.details.lastName !== null,
-            isPhoneNumber: this.props.details.phoneNumber !== null,
-            isEmail: this.props.details.email !== null,
+            isFirstName: this.props.details.firstName !== null && this.props.details.firstName !== "",
+            isLastName: this.props.details.lastName !== null && this.props.details.lastName !== "",
+            isPhoneNumber: this.props.details.phoneNumber !== null &&  this.props.details.phoneNumber !== "",
+            isEmail: this.props.details.email !== null && this.props.details.email !== "",
             isEmailValid: this.validateEmail(this.props.details.email),
             isPhoneNumberValid: this.validatePhoneNumber(this.props.details.phoneNumber),
-            isStreet: this.props.details.street1 !== null,
-            isState: this.props.details.state !== null,
-            isCity: this.props.details.city !== null,
-            isZip: this.props.details.zip !== null,
+            isStreet: this.props.details.street1 !== null && this.props.details.street1 !== "",
+            isState: this.props.details.state !== null && this.props.details.state !== "",
+            isCity: this.props.details.city !== null && this.props.details.city !== "",
+            isZip: this.props.details.zip !== null && this.props.details.zip !== "",
             isZipValid: this.validateZip(this.props.details.zip),
-            isCountry: this.props.details.country
+            isCountry: this.props.details.country !== null && this.props.details.country !== "",
+            isSizes: this.validateSizes()
         }, async () => {
             const { isFirstName, isLastName, isPhoneNumber, isEmail, isEmailValid, isPhoneNumberValid, isStreet, isState,
-                isCity, isZip, isZipValid, isCountry } = this.state;
-            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid) {
-                this.postUser()
+                isCity, isZip, isZipValid, isCountry, isSizes, page } = this.state;
+            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid && 
+                isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && type === "review") {
+                this.setState({page: 1})
             }
-
-            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid && isZipValid && isState && isStreet) {
+            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid && 
+                isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && type === "confirm") {
+                this.postUser()
                 this.handleSubmit()
             }
-
         })
     }
 
-    render() {
-        const { isFirstName, isLastName, isPhoneNumber, isEmail, isPhoneNumberValid, isEmailValid, isStreet, isState,
-            isCity, isZip, isZipValid, isCountry } = this.state;
-        return (
-            <React.Fragment>
-                <Container container direction="column">
-                    <h1>Confirm Your Order</h1>
-                    <PersonalInfo isFirstName={isFirstName}
-                        isLastName={isLastName} isPhoneNumber={isPhoneNumber} isEmail={isEmail}
-                        isPhoneNumberValid={isPhoneNumberValid} isEmailValid={isEmailValid} />
-                    <Address isStreet={isStreet} isState={isState} isCity={isCity} isZip={isZip}
-                        isZipValid={isZipValid} isCountry={isCountry} />
-                    <Sizes />
-                    <Shift>
-                        <StyledButton variant="contained" size="large" color="primary" onClick={() => this.submitOrder()}>Submit</StyledButton>
+    getOrderTotal() {
+        let total = this.getTotalNoOfSizes()
+        let total_cost = 0.00;
+        switch (this.props.cut.cut.name) {
+            case 'Quarter Sock':
+                total_cost = total * 5.45;
+                break;
+            case 'Crew Sock':
+                total_cost = total * 5.95;
+                break;
+            case 'Knee High Sock':
+                total_cost = total * 6.45;
+                break;
+            default:
+                break;
+        }
+        return total_cost.toFixed(2);
+    }
 
-                    </Shift>
-                </Container>
-            </React.Fragment >
-        );
+    render() {
+        const { page, isFirstName, isLastName, isPhoneNumber, isEmail, isPhoneNumberValid, isEmailValid, isStreet, isState,
+            isCity, isZip, isZipValid, isCountry, isSizes } = this.state;
+        switch (page) {
+            case 0:
+                return (
+                    <React.Fragment>
+                        <Container container direction="column">
+                            <Typography variant="h5">Confirm Your Order</Typography>
+                            <PersonalInfo isFirstName={isFirstName}
+                                isLastName={isLastName} isPhoneNumber={isPhoneNumber} isEmail={isEmail}
+                                isPhoneNumberValid={isPhoneNumberValid} isEmailValid={isEmailValid} />
+                            <Address isStreet={isStreet} isState={isState} isCity={isCity} isZip={isZip}
+                                isZipValid={isZipValid} isCountry={isCountry} />
+                            <Sizes isSizes={isSizes}/>
+                            <Grid container justify="space-between" direction="row" xs={6} style={{marginTop: 15}}>
+                                <Grid item xs={5}>
+                                    <Header variant="subtitle1">Order Total</Header>
+                                </Grid>
+                                <Grid item xs={5}>
+                                    <Typography variant="subtitle1">${this.getOrderTotal()}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Shift>
+                                <StyledButton variant="contained" size="large" color="primary" onClick={() => this.submitOrder("review")}>Confirm</StyledButton>
+                            </Shift>
+                        </Container>
+                    </React.Fragment >
+                );
+            case 1: 
+                return (
+                    <React.Fragment>
+                        <Grid container direction="column" justify="center" alignContent="center">
+                            <Typography variant="h5">Confirm your Order</Typography>
+                            <Typography variant="h6">Your Information</Typography>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">First Name</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.firstName}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item  xs={6}>
+                                    <Header variant="subtitle1">Last Name</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.lastName}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Email</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.email}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Phone Number</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.phoneNumber}</Typography>
+                                </Grid>
+                            </Grid>
+                            <StyledDivider/>
+                            <Typography variant="h6">Shipping Address</Typography>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Street</Header>
+                                </Grid>
+                                <Grid ite xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.street1}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Apt/Suit/Other</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.street2 !== null ? this.props.details.street2 : "None" }</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">City</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.city}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Zip Code</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.zip}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">State</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.state}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Country</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.country}</Typography>
+                                </Grid>
+                            </Grid>
+                            <StyledDivider/>
+                            <Typography variant="h6">Order Information</Typography>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Youth</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.youth !== "" ? this.props.details.youth : "0"}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Small</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.small !== "" ? this.props.details.small : "0"}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Medium</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.medium !== "" ? this.props.details.medium : "0"}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row" xs={7}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Large</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">{this.props.details.large !== "" ? this.props.details.large : "0"}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="space-between" direction="row"xs={7} style={{marginTop: 15}}>
+                                <Grid item xs={6}>
+                                    <Header variant="subtitle1">Order Total</Header>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="subtitle1">${this.getOrderTotal()}</Typography>
+                                </Grid>
+                            </Grid>
+                            <Shift>
+                                <StyledButton variant="contained" size="large" color="primary" onClick={() => this.setState({page: 0})}>Edit</StyledButton>
+                                <StyledButton variant="contained" size="large" color="primary" onClick={() => this.submitOrder("confirm")}>Submit</StyledButton>
+                            </Shift>
+                        </Grid>
+                    </React.Fragment >
+                )
+            case 2:
+                return (
+                    <React.Fragment>
+                        <Grid container direction="column" justify="center" alignContent="center">
+                            <Typography variant="h5">Thanks {this.props.details.firstName}, we got your order!</Typography>
+                            <Typography variant="subtitle1">Check your email for more information.</Typography>
+                        </Grid>
+                    </React.Fragment >
+                );
+            default:
+                return (
+                    <div></div>
+                )
+        }
     }
 }
 

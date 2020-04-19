@@ -1,4 +1,4 @@
-import { FIRST_NAME, LAST_NAME, ORGANIZATION, PHONE_NUMBER, EMAIL, STREET1, STREET2, CITY, STATE, ZIP, COUNTRY, YOUTH, SMALL, MEDIUM, LARGE } from "./DetailsAction";
+import { INPUT_FIRST_NAME, INPUT_LAST_NAME, INPUT_ORGANIZATION, INPUT_PHONE_NUMBER, INPUT_EMAIL, INPUT_STREET1, INPUT_STREET2, INPUT_CITY, INPUT_STATE, INPUT_ZIP, INPUT_COUNTRY, INPUT_YOUTH, INPUT_SMALL, INPUT_MEDIUM, INPUT_LARGE } from "./DetailsAction";
 
 const initialState = () => {
     return {
@@ -22,77 +22,77 @@ const initialState = () => {
 
 const detailsReducer = (state = initialState(), action) => {
     switch (action.type) {
-        case FIRST_NAME:
+        case INPUT_FIRST_NAME:
             return {
                 ...state,
                 firstName: action.payload.text
             };
-        case LAST_NAME:
+        case INPUT_LAST_NAME:
             return {
                 ...state,
                 lastName: action.payload.text
             };
-        case ORGANIZATION:
+        case INPUT_ORGANIZATION:
             return {
                 ...state,
                 organization: action.payload.text
             };
-        case PHONE_NUMBER:
+        case INPUT_PHONE_NUMBER:
             return {
                 ...state,
                 phoneNumber: action.payload.text
             };
-        case EMAIL:
+        case INPUT_EMAIL:
             return {
                 ...state,
                 email: action.payload.text
             };
-        case STREET1:
+        case INPUT_STREET1:
             return {
                 ...state,
                 street1: action.payload.text
             };    
-        case STREET2:
+        case INPUT_STREET2:
             return {
                 ...state,
                 street2: action.payload.text
             };
-        case CITY:
+        case INPUT_CITY:
             return {
                 ...state,
                 city: action.payload.text
             };
-        case STATE:
+        case INPUT_STATE:
             return {
                 ...state,
                 state: action.payload.text
             };
-        case ZIP:
+        case INPUT_ZIP:
             return {
                 ...state,
                 zip: action.payload.text
             };
-        case COUNTRY:
+        case INPUT_COUNTRY:
             return {
                 ...state,
                 country: action.payload.text
             };
-        case YOUTH:
+        case INPUT_YOUTH:
             return {
                 ...state,
                 youth: action.payload.text
             };
-        case SMALL:
+        case INPUT_SMALL:
             return {
                 ...state,
                 small: action.payload.text
             };
-        case MEDIUM:
+        case INPUT_MEDIUM:
             return {
                 ...state,
                 medium: action.payload.text
             };
-        case LARGE:
+        case INPUT_LARGE:
             return {
                 ...state,
                 large: action.payload.text

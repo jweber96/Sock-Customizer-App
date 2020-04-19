@@ -1,15 +1,17 @@
 import React from "react"
-import { AppBar, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import "typeface-roboto";
-
+import { NavLink, BrowserRouter as Router, withRouter } from 'react-router-dom'
 
 const header = (props) => {
     return (
         <React.Fragment>
             <AppBar position="static">
                 <Toolbar>
-                    <h1>Sock Customizer</h1>
+                    <Router>
+                        <Typography variant="h5" onClick={()=>{props.history.push('/'); window.location.reload()}}>Sock Customizer</Typography>
+                    </Router>
                 </Toolbar>
             </AppBar>
         </React.Fragment>
@@ -28,4 +30,4 @@ const mapDispatchToProps = () => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(header)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(header))

@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { Input, IconButton, Grid } from "@material-ui/core";
+import { Input, IconButton, Grid, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { inputLogo, resetLogo } from "./LogoActions";
 import "typeface-roboto";
@@ -30,7 +30,7 @@ const logo = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-            <h1>Add Logo</h1>
+            <Typography variant="h5">Add Logo</Typography>
             {
                 props.logo !== null
                 ? (

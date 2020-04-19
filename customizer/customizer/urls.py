@@ -18,9 +18,11 @@ from django.urls import path
 from backend.api import router
 from django.conf.urls import include, url
 from backend import views
+from backend.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    url(r'api/existing-user', views.find_existing_user, name='find_existing_user')
+    url(r'api/existing-user', views.find_existing_user, name='find_existing_user'),
+    path('', index, name='index'),
 ]

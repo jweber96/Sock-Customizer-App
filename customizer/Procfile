@@ -1,3 +1,2 @@
-cd customizer 
 release: python manage.py migrate
-web: gunicorn backend.wsgi --log-file -
+web: cd ./customizer/ && gunicorn backend.wsgi --log-file -

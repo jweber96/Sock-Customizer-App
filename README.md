@@ -1,8 +1,8 @@
 **Sock Customizer**
 1. Clone the repo either by downloading a zip from https://github.com/my1124/Sock-Customizer.git 
-or by typing the following into your termainl - git clone https://github.com/my1124/Sock-Customizer.git
+or by typing the following into your terminal - git clone https://github.com/my1124/Sock-Customizer.git
 
-2. Create a virtual evironment. For reference on how to do this, refer to https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/.
+2. Create a virtual environment. For reference on how to do this, refer to https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/.
 
 3. Install the packages in the requirements.txt by typing the following into your terminal - 
 pip install -r requirements.txt

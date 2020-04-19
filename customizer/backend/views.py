@@ -1,12 +1,18 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.permissions import AllowAny, IsAdminUser
 from backend.models import Customer, Order, Address, Sizes
 from backend.serializers import CustomerSerializer, OrderSerializer, UserSerializer, AddressSerializer, SizeSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.views.generic import TemplateView
+from django.views.decorators.cache import never_cache
+
+# Serve Single Page Application
+index = never_cache(TemplateView.as_view(template_name='index.html'))
 
 @api_view(['GET'])
 def find_existing_user(request):
@@ -17,47 +23,86 @@ def find_existing_user(request):
     return Response({"id": -1})
 
 class CustomerViewSet(viewsets.ModelViewSet):
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            queryset = Customer.objects.all()  
-            return queryset  
-        else:
-            queryset = None
-            return HttpResponse(status=403) 
+    queryset = Customer.objects.all()  
     serializer_class = CustomerSerializer
+    permission_classes_by_action = {'create': [AllowAny],
+                                    'list': [IsAdminUser]}
+    def create(self, request, *args, **kwargs):
+        return super(CustomerViewSet, self).create(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        return super(CustomerViewSet, self).list(request, *args, **kwargs)
+    def get_permissions(self):
+        try:
+            # return permission_classes depending on `action` 
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError: 
+            # action is not set return default permission_classes
+            return [permission() for permission in self.permission_classes]
 
 class OrderViewSet(viewsets.ModelViewSet):
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            queryset = Order.objects.all() 
-            return queryset   
-        else:
-            return HttpResponse(status=403) 
+    queryset = Order.objects.all() 
     serializer_class = OrderSerializer
+    permission_classes_by_action = {'create': [AllowAny],
+                                    'list': [IsAdminUser]}
+    def create(self, request, *args, **kwargs):
+        return super(OrderViewSet, self).create(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        return super(OrderViewSet, self).list(request, *args, **kwargs)
+    def get_permissions(self):
+        try:
+            # return permission_classes depending on `action` 
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError: 
+            # action is not set return default permission_classes
+            return [permission() for permission in self.permission_classes]
 
 class UserViewSet(viewsets.ModelViewSet):
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            queryset = User.objects.all()  
-            return queryset  
-        else:
-            return HttpResponse(status=403) 
+    queryset = User.objects.all()  
     serializer_class = UserSerializer
+    permission_classes_by_action = {'create': [AllowAny],
+                                    'list': [IsAdminUser]}
+    def create(self, request, *args, **kwargs):
+        return super(UserViewSet, self).create(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        return super(UserViewSet, self).list(request, *args, **kwargs)
+    def get_permissions(self):
+        try:
+            # return permission_classes depending on `action` 
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError: 
+            # action is not set return default permission_classes
+            return [permission() for permission in self.permission_classes]
 
 class AddressViewSet(viewsets.ModelViewSet):
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            queryset = Address.objects.all()  
-            return queryset  
-        else:
-            return HttpResponse(status=403) 
+    queryset = Address.objects.all()  
     serializer_class = AddressSerializer
+    permission_classes_by_action = {'create': [AllowAny],
+                                    'list': [IsAdminUser]}
+    def create(self, request, *args, **kwargs):
+        return super(AddressViewSet, self).create(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        return super(AddressViewSet, self).list(request, *args, **kwargs)
+    def get_permissions(self):
+        try:
+            # return permission_classes depending on `action` 
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError: 
+            # action is not set return default permission_classes
+            return [permission() for permission in self.permission_classes]
 
 class SizeViewSet(viewsets.ModelViewSet):
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            queryset = Sizes.objects.all() 
-            return queryset   
-        else:
-            return HttpResponse(status=403) 
+    queryset = Sizes.objects.all() 
     serializer_class = SizeSerializer
+    permission_classes_by_action = {'create': [AllowAny],
+                                    'list': [IsAdminUser]}
+    def create(self, request, *args, **kwargs):
+        return super(SizeViewSet, self).create(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        return super(SizeViewSet, self).list(request, *args, **kwargs)
+    def get_permissions(self):
+        try:
+            # return permission_classes depending on `action` 
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError: 
+            # action is not set return default permission_classes
+            return [permission() for permission in self.permission_classes]

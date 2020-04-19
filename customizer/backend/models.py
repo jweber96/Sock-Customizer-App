@@ -14,8 +14,8 @@ class Customer(models.Model):
     phone_number= models.CharField(max_length=12, default="")
     organization = models.CharField(max_length=250, blank=True, null=True)
     added_at = models.DateTimeField(blank=True, null=True, default=datetime.now)
-    # def __str__(self):
-    #     return self.user.first_name + ' ' + self.user.last_name
+    def __str__(self):
+        return self.user.first_name + ' ' + self.user.last_name
         
 class Address(models.Model):
     street1 = models.CharField(max_length=250)
@@ -37,8 +37,8 @@ class Order(models.Model):
     brim_primary_text = models.CharField(max_length=250, blank=True, null=True)
     logo = models.ImageField(upload_to='logos/%Y/%m/%d', null=True, blank=True)
     added_at = models.DateTimeField(blank=True, null=True, default=datetime.now)
-    # def __str__(self):
-    #     return self.customer.user.first_name + ' ' + self.customer.user.last_name
+    def __str__(self):
+        return self.customer.user.first_name + ' ' + self.customer.user.last_name
 
 class Sizes(models.Model):
     youth = models.IntegerField(blank=True, null=True)

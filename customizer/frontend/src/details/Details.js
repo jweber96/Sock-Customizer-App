@@ -103,7 +103,8 @@ class details extends Component {
                 added_at: moment(),
                 cut: this.props.cut.cut.name,
                 order_id: this.state.orderId,
-                customer_id: this.state.customerId
+                customer_id: this.state.customerId,
+                total_price: this.getOrderTotal()
             })
     }
 
@@ -160,7 +161,7 @@ class details extends Component {
         if (this.props.details.youth === "") {
             youth = 0
         } else {
-            youth = parseInt(this.props.details.youth) 
+            youth = parseInt(this.props.details.youth)
         }
         if (this.props.details.small === "") {
             small = 0
@@ -183,11 +184,11 @@ class details extends Component {
 
     validateSizes() {
         let total = this.getTotalNoOfSizes()
-        return total >= 5;
+        return total >= 5 && this.props.details.youth >= 0 && this.props.details.small && this.props.details.medium && this.props.details.large;
     }
 
     postUser = async () => {
-        const res0 = await fetch('/api/existing-user/?email=' + this.props.details.email, {
+        const res0 = await fetch('http://127.0.0.1:8000/api/existing-user/?email=' + this.props.details.email, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -204,7 +205,7 @@ class details extends Component {
                 "password": uuid()
             }
 
-            const res = await fetch('/api/users/', {
+            const res = await fetch('http://127.0.0.1:8000/api/users/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
@@ -212,7 +213,7 @@ class details extends Component {
             const jsonRes = await res.json()
             this.setState({ userId: jsonRes.id }, async () => this.postCustomer())
         } else {
-            this.setState({userId: userRes.id}, async() => this.postCustomer())
+            this.setState({ userId: userRes.id }, async () => this.postCustomer())
         }
     }
 
@@ -224,7 +225,7 @@ class details extends Component {
             "added_at": moment()
         }
 
-        const res = await fetch('/api/customers/', {
+        const res = await fetch('http://127.0.0.1:8000/api/customers/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(customer)
@@ -248,7 +249,7 @@ class details extends Component {
             "country": this.props.details.country
         }
 
-        await fetch('/api/addresses/', {
+        await fetch('http://127.0.0.1:8000/api/addresses/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(address)
@@ -267,7 +268,7 @@ class details extends Component {
             "logo": this.props.logo.inputLogo,
             "added_at": moment()
         }
-        const res = await fetch('/api/orders/', {
+        const res = await fetch('http://127.0.0.1:8000/api/orders/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(order)
@@ -285,13 +286,13 @@ class details extends Component {
             "medium": this.props.details.medium,
             "large": this.props.details.large,
         }
-        const res = await fetch('/api/sizes/', {
+        const res = await fetch('http://127.0.0.1:8000/api/sizes/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(sizes)
         })
         if (res.status === 200 || res.status === 201) {
-            this.setState({page: 2})
+            this.setState({ page: 2 })
         }
     }
 
@@ -299,7 +300,7 @@ class details extends Component {
         this.setState({
             isFirstName: this.props.details.firstName !== null && this.props.details.firstName !== "",
             isLastName: this.props.details.lastName !== null && this.props.details.lastName !== "",
-            isPhoneNumber: this.props.details.phoneNumber !== null &&  this.props.details.phoneNumber !== "",
+            isPhoneNumber: this.props.details.phoneNumber !== null && this.props.details.phoneNumber !== "",
             isEmail: this.props.details.email !== null && this.props.details.email !== "",
             isEmailValid: this.validateEmail(this.props.details.email),
             isPhoneNumberValid: this.validatePhoneNumber(this.props.details.phoneNumber),
@@ -313,11 +314,11 @@ class details extends Component {
         }, async () => {
             const { isFirstName, isLastName, isPhoneNumber, isEmail, isEmailValid, isPhoneNumberValid, isStreet, isState,
                 isCity, isZip, isZipValid, isCountry, isSizes, page } = this.state;
-            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid && 
+            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid &&
                 isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && type === "review") {
-                this.setState({page: 1})
+                this.setState({ page: 1 })
             }
-            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid && 
+            if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid &&
                 isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && type === "confirm") {
                 this.postUser()
                 this.handleSubmit()
@@ -330,13 +331,19 @@ class details extends Component {
         let total_cost = 0.00;
         switch (this.props.cut.cut.name) {
             case 'Quarter Sock':
-                total_cost = total * 5.45;
+                if (total > 0) {
+                    total_cost = total * 5.45;
+                }
                 break;
             case 'Crew Sock':
-                total_cost = total * 5.95;
+                if (total > 0) {
+                    total_cost = total * 5.95;
+                }
                 break;
             case 'Knee High Sock':
-                total_cost = total * 6.45;
+                if (total > 0) {
+                    total_cost = total * 6.45;
+                }
                 break;
             default:
                 break;
@@ -358,8 +365,8 @@ class details extends Component {
                                 isPhoneNumberValid={isPhoneNumberValid} isEmailValid={isEmailValid} />
                             <Address isStreet={isStreet} isState={isState} isCity={isCity} isZip={isZip}
                                 isZipValid={isZipValid} isCountry={isCountry} />
-                            <Sizes isSizes={isSizes}/>
-                            <Grid container justify="space-between" direction="row" xs={6} style={{marginTop: 15}}>
+                            <Sizes isSizes={isSizes} />
+                            <Grid container justify="space-between" direction="row" xs={6} style={{ marginTop: 15 }}>
                                 <Grid item xs={5}>
                                     <Header variant="subtitle1">Order Total</Header>
                                 </Grid>
@@ -373,7 +380,7 @@ class details extends Component {
                         </Container>
                     </React.Fragment >
                 );
-            case 1: 
+            case 1:
                 return (
                     <React.Fragment>
                         <Grid container direction="column" justify="center" alignContent="center">
@@ -388,7 +395,7 @@ class details extends Component {
                                 </Grid>
                             </Grid>
                             <Grid container justify="space-between" direction="row" xs={7}>
-                                <Grid item  xs={6}>
+                                <Grid item xs={6}>
                                     <Header variant="subtitle1">Last Name</Header>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -411,7 +418,7 @@ class details extends Component {
                                     <Typography variant="subtitle1">{this.props.details.phoneNumber}</Typography>
                                 </Grid>
                             </Grid>
-                            <StyledDivider/>
+                            <StyledDivider />
                             <Typography variant="h6">Shipping Address</Typography>
                             <Grid container justify="space-between" direction="row" xs={7}>
                                 <Grid item xs={6}>
@@ -426,7 +433,7 @@ class details extends Component {
                                     <Header variant="subtitle1">Apt/Suit/Other</Header>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography variant="subtitle1">{this.props.details.street2 !== null ? this.props.details.street2 : "None" }</Typography>
+                                    <Typography variant="subtitle1">{this.props.details.street2 !== null ? this.props.details.street2 : "None"}</Typography>
                                 </Grid>
                             </Grid>
                             <Grid container justify="space-between" direction="row" xs={7}>
@@ -461,7 +468,7 @@ class details extends Component {
                                     <Typography variant="subtitle1">{this.props.details.country}</Typography>
                                 </Grid>
                             </Grid>
-                            <StyledDivider/>
+                            <StyledDivider />
                             <Typography variant="h6">Order Information</Typography>
                             <Grid container justify="space-between" direction="row" xs={7}>
                                 <Grid item xs={6}>
@@ -495,7 +502,7 @@ class details extends Component {
                                     <Typography variant="subtitle1">{this.props.details.large !== "" ? this.props.details.large : "0"}</Typography>
                                 </Grid>
                             </Grid>
-                            <Grid container justify="space-between" direction="row"xs={7} style={{marginTop: 15}}>
+                            <Grid container justify="space-between" direction="row" xs={7} style={{ marginTop: 15 }}>
                                 <Grid item xs={6}>
                                     <Header variant="subtitle1">Order Total</Header>
                                 </Grid>
@@ -504,7 +511,7 @@ class details extends Component {
                                 </Grid>
                             </Grid>
                             <Shift>
-                                <StyledButton variant="contained" size="large" color="primary" onClick={() => this.setState({page: 0})}>Edit</StyledButton>
+                                <StyledButton variant="contained" size="large" color="primary" onClick={() => this.setState({ page: 0 })}>Edit</StyledButton>
                                 <StyledButton variant="contained" size="large" color="primary" onClick={() => this.submitOrder("confirm")}>Submit</StyledButton>
                             </Shift>
                         </Grid>

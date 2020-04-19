@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux";
 import 'typeface-roboto';
 import { Typography, Grid, FormHelperText } from '@material-ui/core';
@@ -14,15 +14,15 @@ class address extends Component {
     handleYouthText = (event) => {
         this.props.inputYouth(event.target.value);
     }
-    
+
     handleSmallText = (event) => {
         this.props.inputSmall(event.target.value);
     }
-    
+
     handleMediumText = (event) => {
         this.props.inputMedium(event.target.value);
     }
-    
+
     handleLargeText = (event) => {
         this.props.inputLarge(event.target.value);
     }
@@ -33,20 +33,24 @@ class address extends Component {
                 <Typography variant="h6">Order Information</Typography>
                 <Grid container direction="row">
                     <Grid item xs={2}>
-                        <Input label="Youth" required={false} value={this.props.youth} onChange={this.handleYouthText}/>
+                        <Input label="Youth" required={false} value={this.props.youth} onChange={this.handleYouthText} />
                     </Grid>
                     <Grid item xs={2}>
-                        <Input label="Small" required={false} value={this.props.small} onChange={this.handleSmallText}/>
-                    </Grid>            
-                    <Grid item xs={2}>
-                        <Input label="Medium" required={false} value={this.props.medium} onChange={this.handleMediumText}/>
+                        <Input label="Small" required={false} value={this.props.small} onChange={this.handleSmallText} />
                     </Grid>
                     <Grid item xs={2}>
-                        <Input label="Large" required={false} value={this.props.large} onChange={this.handleLargeText}/>
+                        <Input label="Medium" required={false} value={this.props.medium} onChange={this.handleMediumText} />
                     </Grid>
-                </Grid>  
+                    <Grid item xs={2}>
+                        <Input label="Large" required={false} value={this.props.large} onChange={this.handleLargeText} />
+                    </Grid>
+                </Grid>
                 <Grid item>
                     {!this.props.isSizes && <FormHelperText error>You must order at least 5 socks</FormHelperText>}
+                    {this.props.youth < 0 && <FormHelperText error>Number of youth socks must be positive</FormHelperText>}
+                    {this.props.small < 0 && <FormHelperText error>Number of small socks must be positive</FormHelperText>}
+                    {this.props.medium < 0 && <FormHelperText error>Number of medium socks must be positive</FormHelperText>}
+                    {this.props.large < 0 && <FormHelperText error>Number of large socks must be positive</FormHelperText>}
                 </Grid>
             </React.Fragment>
         );
@@ -66,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         inputYouth: (text) => dispatch(inputYouth(text)),
         inputSmall: (text) => dispatch(inputSmall(text)),
-        inputMedium: (text) => dispatch(inputMedium(text)), 
+        inputMedium: (text) => dispatch(inputMedium(text)),
         inputLarge: (text) => dispatch(inputLarge(text))
     };
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { Grid, IconButton, TextField } from "@material-ui/core";
+import { Grid, IconButton, TextField, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { inputToeText, inputBrimText, resetAllText } from "./TextActions";
 import "typeface-roboto";
@@ -54,9 +54,9 @@ const text = (props) => {
     return (
         <React.Fragment>
             <Grid container direction="column" justify="center" alignItems="center">
-                <h1>Add Text</h1>
-                <StyledTextContainer label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
-                <StyledTextContainer label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
+                <Typography variant="h5">Add Text</Typography>
+                <StyledTextContainer inputProps={{maxLength: 14}} label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
+                <StyledTextContainer inputProps={{maxLength: 14}} label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
                 <Grid item>
                     {
                         !canShowDelete()

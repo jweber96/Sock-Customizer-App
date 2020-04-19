@@ -21,5 +21,6 @@ from backend import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    url(r'api/existing-user', views.find_existing_user, name='find_existing_user')
 ]

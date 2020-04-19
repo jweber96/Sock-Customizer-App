@@ -1,139 +1,139 @@
-export const FIRST_NAME = "FIRST_NAME";
-export const LAST_NAME = "INPUT_TOE_SECONDARY_TEXT";
-export const ORGANIZATION = "ORGANIZATION";
-export const PHONE_NUMBER = "PHONE_NUMBER";
-export const EMAIL = "EMAIL";
-export const STREET1 = "STREET1"
-export const STREET2 = "STREET2"
-export const CITY = "CITY"
-export const STATE = "STATE"
-export const ZIP = "ZIP"
-export const COUNTRY = "COUNTRY"
-export const YOUTH = "YOUTH"
-export const SMALL = "SMALL"
-export const MEDIUM = "MEDIUM"
-export const LARGE = "LARGE"
+export const INPUT_FIRST_NAME = "INPUT_FIRST_NAME";
+export const INPUT_LAST_NAME = "INPUT_LAST_NAME";
+export const INPUT_ORGANIZATION = "INPUT_ORGANIZATION";
+export const INPUT_PHONE_NUMBER = "INPUT_PHONE_NUMBER";
+export const INPUT_EMAIL = "INPUT_EMAIL";
+export const INPUT_STREET1 = "INPUT_STREET1"
+export const INPUT_STREET2 = "INPUT_STREET2"
+export const INPUT_CITY = "INPUT_CITY"
+export const INPUT_STATE = "INPUT_STATE"
+export const INPUT_ZIP = "INPUT_ZIP"
+export const INPUT_COUNTRY = "INPUT_COUNTRY"
+export const INPUT_YOUTH = "INPUT_YOUTH"
+export const INPUT_SMALL = "INPUT_SMALL"
+export const INPUT_MEDIUM = "INPUT_MEDIUM"
+export const INPUT_LARGE = "INPUT_LARGE"
 
-export const firstName = (text) => {
+export const inputFirstName = (text) => {
     return {
-        type: FIRST_NAME,
+        type: INPUT_FIRST_NAME,
         payload: {
             text: text
         }
     };
 }
 
-export const lastName = (text) => {
+export const inputLastName = (text) => {
     return {
-        type: LAST_NAME,
+        type: INPUT_LAST_NAME,
         payload: {
             text: text
         }
     };
 }
 
-export const organization = (text) => {
+export const inputOrganization = (text) => {
     return {
-        type: ORGANIZATION,
+        type: INPUT_ORGANIZATION,
         payload: {
             text: text
         }
     };
 }
 
-export const phoneNumber = (text) => {
+export const inputPhoneNumber = (text) => {
     return {
-        type: PHONE_NUMBER,
+        type: INPUT_PHONE_NUMBER,
         payload: {
             text: text
         }
     };
 }
 
-export const email = (text) => {
+export const inputEmail = (text) => {
     return {
-        type: EMAIL,
+        type: INPUT_EMAIL,
         payload: {
             text: text
         }
     };
 }
 
-export const street1 = (text) => {
+export const inputStreet1 = (text) => {
     return {
-        type: STREET1,
+        type: INPUT_STREET1,
         payload: {
             text: text
         }
     };
 }
 
-export const street2 = (text) => {
+export const inputStreet2 = (text) => {
     return {
-        type: STREET2,
+        type: INPUT_STREET2,
         payload: {
             text: text
         }
     };
 }
 
-export const city = (text) => {
+export const inputCity = (text) => {
     return {
-        type: CITY,
+        type: INPUT_CITY,
         payload: {
             text: text
         }
     };
 }
 
-export const state = (text) => {
+export const inputState = (text) => {
     return {
-        type: STATE,
+        type: INPUT_STATE,
         payload: {
             text: text
         }
     };
 }
 
-export const zip = (text) => {
+export const inputZip = (text) => {
     return {
-        type: ZIP,
+        type: INPUT_ZIP,
         payload: {
             text: text
         }
     };
 }
 
-export const country = (text) => {
+export const inputCountry = (text) => {
     return {
-        type: COUNTRY,
+        type: INPUT_COUNTRY,
         payload: {
             text: text
         }
     };
 }
 
-export const youth = (text) => {
+export const inputYouth = (text) => {
     return {
-        type: YOUTH,
+        type: INPUT_YOUTH,
         payload: {
             text: text
         }
     };
 }
 
-export const small = (text) => {
+export const inputSmall = (text) => {
     return {
-        type: SMALL,
+        type: INPUT_SMALL,
         payload: {
             text: text
         }
     };
 }
 
-export const medium = (text) => {
+export const inputMedium = (text) => {
     return {
-        type: MEDIUM,
+        type: INPUT_MEDIUM,
         payload: {
             text: text
         }
@@ -141,9 +141,9 @@ export const medium = (text) => {
 }
 
 
-export const large = (text) => {
+export const inputLarge = (text) => {
     return {
-        type: LARGE,
+        type: INPUT_LARGE,
         payload: {
             text: text
         }

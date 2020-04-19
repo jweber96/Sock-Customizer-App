@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import { connect } from "react-redux";
-import { GridList, GridListTile, IconButton } from "@material-ui/core";
+import { GridList, GridListTile, IconButton, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { pickPrimaryColor, pickSecondaryColor } from "./ColorsActions";
 import "typeface-roboto";
@@ -111,6 +111,7 @@ class colorsPicker extends Component {
     componentDidMount(){
         this.pageLoad()
     };
+    
     render() {
         return (
             <React.Fragment>
@@ -118,13 +119,13 @@ class colorsPicker extends Component {
                     this.props.isPrimary
                     ? (
                         <React.Fragment>
-                            <h1>Primary Colors</h1>
-                            <p>{this.props.primaryColor || "No color picked!"}</p>
+                            <Typography variant="h5">Primary Colors</Typography>
+                            <Typography variant="subtitle2">{this.props.primaryColor || "No color picked!"}</Typography>
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <h1>Secondary Colors</h1>
-                            <p>{this.props.secondaryColor || "No color picked!"}</p>
+                            <Typography variant="h5">Secondary Colors</Typography>
+                            <Typography variant="subtitle2">{this.props.secondaryColor || "No color picked!"}</Typography>
                         </React.Fragment>
                     )
                 }
@@ -135,7 +136,7 @@ class colorsPicker extends Component {
                                 <GridListTile key={index}>
                                     <svg width="32" height="32">
                                     <circle id={this.props.isPrimary ? "primary_" + color : "secondary_" + color} cx="16" cy="16" r="15" stroke="black" strokeWidth="2" onClick={this.handlePick} fill={this.props.colors[color]}>
-                                            <title>{color}</title>
+                                            <Typography variant="subtitle2">{color}</Typography>
                                         </circle>
                                     </svg>
                                 </GridListTile>

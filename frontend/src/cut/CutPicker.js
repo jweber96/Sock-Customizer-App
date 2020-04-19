@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { inputCut } from "./CutActions";
@@ -12,6 +12,12 @@ const Container = withStyles({
     }
 })(Grid);
 
+const StyledButton = withStyles({
+    label: {
+        color: 'white'
+    },
+})(Button);
+
 const cutPicker = (props) => {
     const handleClick = (cut) => {
         props.inputCut(cut);
@@ -22,8 +28,8 @@ const cutPicker = (props) => {
             <Container item>
                 <Grid container direction="column" justify="space-around" alignItems="center">
                     <Grid item>
-                        <h2 style={{textAlign: 'center'}}>{props.data.name}</h2>
-                        <h2 style={{textAlign: 'center', color: '#585858'}}>${props.data.price}</h2>
+                        <Typography variant="h6" style={{textAlign: 'center'}}>{props.data.name}</Typography>
+                        <Typography variant="h6" style={{textAlign: 'center', color: '#585858'}}>${props.data.price}</Typography>
                     </Grid>
                     <img width={200} height={200} src={props.data.image} alt={props.data.description} />
                     {
@@ -33,14 +39,14 @@ const cutPicker = (props) => {
                                 {
                                     props.cut ?.name === props.data.name
                                         ? (
-                                            <Button variant="contained" size="large" color="secondary">Selected</Button>
+                                            <StyledButton variant="contained" size="large" color="secondary">Selected</StyledButton>
                                         ) : (
-                                            <Button variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</Button>
+                                            <StyledButton variant="contained" size="large" color="primary" onClick={() => handleClick(props.data)}>Available</StyledButton>
                                         )
                             }
                             </NavLink>
                         ) : (
-                            <Button variant="contained" size="large" color="primary" disabled>Unavailable</Button>
+                            <StyledButton variant="contained" size="large" color="primary" disabled>Unavailable</StyledButton>
                         )
                     }
                 </Grid>

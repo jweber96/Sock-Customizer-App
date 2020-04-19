@@ -1,20 +1,28 @@
 import React from "react"
 import { connect } from "react-redux";
-import { Button, Grid, Paper } from "@material-ui/core";
+import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import Preview from "../preview/Preview";
 import "typeface-roboto";
 import { withStyles } from '@material-ui/core/styles';
+import theme from "../theme";
 
 const Section = withStyles({
     root: {
-        backgroundColor: "#eff0f1", 
+        backgroundColor: theme.palette.primary.light,
         width: '80%', 
         marginTop: 25, 
         paddingBottom: 50,
-        marginBottom: 25
+        marginBottom: 25,
+        borderColor: theme.palette.primary.dark
     }
 })(Paper);
+
+const StyledButton = withStyles({
+    label: {
+        color: 'white',
+    },
+})(Button);
 
 const tabsBody = (props) => {
     return (
@@ -34,9 +42,9 @@ const tabsBody = (props) => {
                                 </Section>
                             ) : (
                                 <React.Fragment>
-                                    <h1>No cut selected!</h1>
+                                    <Typography variant="h5">No cut selected!</Typography>
                                     <NavLink to="/">
-                                        <Button variant="contained" size="large" color="primary">Select a cut!</Button>
+                                        <StyledButton variant="contained" size="large" color="primary">Select a cut!</StyledButton>
                                     </NavLink>
                                 </React.Fragment>
                             )

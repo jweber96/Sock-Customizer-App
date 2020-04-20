@@ -48,15 +48,11 @@ class colorsPicker extends Component {
             this.normalize(index);
         }
         if (this.props.primaryColor !== null) {
-            console.log("PAGE LOAD p: " + this.props.primaryColor);
             var id = "primary_" + this.props.primaryColor;
-            console.log("id: " + id);
             this.identify(id);
         }
         if (this.props.secondaryColor !== null) {
-            console.log("PAGE LOAD s: " + this.props.secondaryColor);
             var id = "secondary_" + this.props.secondaryColor;
-            console.log("id: " + id);
             this.identify(id);
         }
     }
@@ -72,10 +68,7 @@ class colorsPicker extends Component {
     }
 
     identify = id => {
-        console.log("id: " + id);
         var selected = document.getElementById(id);
-        console.log("document: " + document);
-        console.log("selected: " + selected);
         if (selected !== null) {
             selected.style.stroke = "red";
             selected.style.strokeWidth = "4";

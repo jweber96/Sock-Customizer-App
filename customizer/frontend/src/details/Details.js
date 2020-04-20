@@ -115,7 +115,7 @@ class details extends Component {
     sendForm(variables) {
         //Sends email to company email
         window.emailjs.send(
-            'default_service', "template_sD1dx3I6",
+            'default_service', "order_summary_seller_",
             variables
         ).then(res => {
             console.log('Email successfully sent!')
@@ -124,7 +124,7 @@ class details extends Component {
             .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
         //Sends email to customer
         window.emailjs.send(
-            'default_service', "template_sD1dx3I6_clone",
+            'default_service', "order_summary_seller__clone",
             variables
         ).then(res => {
             console.log('Email successfully sent!')
@@ -395,7 +395,7 @@ class details extends Component {
                     <React.Fragment>
                         <Grid container direction="column" justify="center" alignContent="center">
                             <Typography variant="h5">Confirm your Order</Typography>
-                            <Typography variant="h6">Your Information</Typography>
+                            <Typography variant="h6">Personal Information</Typography>
                             <Grid container justify="space-between" direction="row" xs={7}>
                                 <Grid item xs={6}>
                                     <Header variant="subtitle1">First Name</Header>

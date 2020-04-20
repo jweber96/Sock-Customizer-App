@@ -3,7 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "react-scripts": "3.3.0"
+        "babel-eslint": "10.1.0",
+        "react-scripts": "3.3.0",  
+        "webpack": "4.42.0"
     },
     "scripts": {
       "start": "cd customizer/frontend && react-scripts start",

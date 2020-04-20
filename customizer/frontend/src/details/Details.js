@@ -63,6 +63,10 @@ class details extends Component {
             isZipValid: true,
             isCountry: true,
             isSizes: true,
+            isYouth: true,
+            isSmall: true, 
+            isMedium: true, 
+            isLarge: true,
             userId: -1,
             customerId: -1,
             orderId: -1,
@@ -184,11 +188,11 @@ class details extends Component {
 
     validateSizes() {
         let total = this.getTotalNoOfSizes()
-        return total >= 5 && this.props.details.youth >= 0 && this.props.details.small && this.props.details.medium && this.props.details.large;
+        return total >= 5;
     }
 
     postUser = async () => {
-        const res0 = await fetch('http://127.0.0.1:8000/api/existing-user/?email=' + this.props.details.email, {
+        const res0 = await fetch('/api/existing-user/?email=' + this.props.details.email, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -205,7 +209,7 @@ class details extends Component {
                 "password": uuid()
             }
 
-            const res = await fetch('http://127.0.0.1:8000/api/users/', {
+            const res = await fetch('/api/users/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
@@ -225,7 +229,7 @@ class details extends Component {
             "added_at": moment()
         }
 
-        const res = await fetch('http://127.0.0.1:8000/api/customers/', {
+        const res = await fetch('/api/customers/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(customer)
@@ -249,7 +253,7 @@ class details extends Component {
             "country": this.props.details.country
         }
 
-        await fetch('http://127.0.0.1:8000/api/addresses/', {
+        await fetch('/api/addresses/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(address)
@@ -268,7 +272,7 @@ class details extends Component {
             "logo": this.props.logo.inputLogo,
             "added_at": moment()
         }
-        const res = await fetch('http://127.0.0.1:8000/api/orders/', {
+        const res = await fetch('/api/orders/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(order)
@@ -286,7 +290,7 @@ class details extends Component {
             "medium": this.props.details.medium,
             "large": this.props.details.large,
         }
-        const res = await fetch('http://127.0.0.1:8000/api/sizes/', {
+        const res = await fetch('/api/sizes/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(sizes)
@@ -310,16 +314,22 @@ class details extends Component {
             isZip: this.props.details.zip !== null && this.props.details.zip !== "",
             isZipValid: this.validateZip(this.props.details.zip),
             isCountry: this.props.details.country !== null && this.props.details.country !== "",
-            isSizes: this.validateSizes()
+            isSizes: this.validateSizes(),
+            isYouth: !isNaN(this.props.details.youth) && this.props.details.youth >= 0,
+            isSmall: !isNaN(this.props.details.small) && this.props.details.small >= 0,
+            isMedium: !isNaN(this.props.details.medium) && this.props.details.medium >= 0,
+            isLarge: !isNaN(this.props.details.large) && this.props.details.large >= 0,
         }, async () => {
             const { isFirstName, isLastName, isPhoneNumber, isEmail, isEmailValid, isPhoneNumberValid, isStreet, isState,
-                isCity, isZip, isZipValid, isCountry, isSizes, page } = this.state;
+                isCity, isZip, isZipValid, isCountry, isSizes, isYouth, isSmall, isMedium, isLarge } = this.state;
             if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid &&
-                isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && type === "review") {
+                isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && 
+                isYouth && isSmall && isMedium && isLarge && type === "review") {
                 this.setState({ page: 1 })
             }
             if (isFirstName && isLastName && isPhoneNumber && isEmail && isEmailValid && isPhoneNumberValid &&
-                isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && type === "confirm") {
+                isCity && isZipValid && isZip && isCountry && isState && isStreet && isSizes && 
+                isYouth && isSmall && isMedium && isLarge && type === "confirm") {
                 this.postUser()
                 this.handleSubmit()
             }
@@ -353,7 +363,7 @@ class details extends Component {
 
     render() {
         const { page, isFirstName, isLastName, isPhoneNumber, isEmail, isPhoneNumberValid, isEmailValid, isStreet, isState,
-            isCity, isZip, isZipValid, isCountry, isSizes } = this.state;
+            isCity, isZip, isZipValid, isCountry, isSizes, isYouth, isSmall, isMedium, isLarge } = this.state;
         switch (page) {
             case 0:
                 return (
@@ -365,7 +375,7 @@ class details extends Component {
                                 isPhoneNumberValid={isPhoneNumberValid} isEmailValid={isEmailValid} />
                             <Address isStreet={isStreet} isState={isState} isCity={isCity} isZip={isZip}
                                 isZipValid={isZipValid} isCountry={isCountry} />
-                            <Sizes isSizes={isSizes} />
+                            <Sizes isSizes={isSizes} isYouth={isYouth} isSmall={isSmall} isMedium={isMedium} isLarge={isLarge}/>
                             <Grid container justify="space-between" direction="row" xs={6} style={{ marginTop: 15 }}>
                                 <Grid item xs={5}>
                                     <Header variant="subtitle1">Order Total</Header>

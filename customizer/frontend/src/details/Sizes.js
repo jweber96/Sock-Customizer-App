@@ -47,10 +47,10 @@ class address extends Component {
                 </Grid>
                 <Grid item>
                     {!this.props.isSizes && <FormHelperText error>You must order at least 5 socks</FormHelperText>}
-                    {this.props.youth < 0 && <FormHelperText error>Number of youth socks must be positive</FormHelperText>}
-                    {this.props.small < 0 && <FormHelperText error>Number of small socks must be positive</FormHelperText>}
-                    {this.props.medium < 0 && <FormHelperText error>Number of medium socks must be positive</FormHelperText>}
-                    {this.props.large < 0 && <FormHelperText error>Number of large socks must be positive</FormHelperText>}
+                    {!this.props.isYouth && <FormHelperText error>Number of youth socks must be positive</FormHelperText>}
+                    {!this.props.isSmall && <FormHelperText error>Number of small socks must be positive</FormHelperText>}
+                    {!this.props.isMedium && <FormHelperText error>Number of medium socks must be positive</FormHelperText>}
+                    {!this.props.isLarge && <FormHelperText error>Number of large socks must be positive</FormHelperText>}
                 </Grid>
             </React.Fragment>
         );

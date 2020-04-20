@@ -23,7 +23,7 @@ SECRET_KEY = '^e85%in*jiygmd=b_u-pwd%()xk0mi761yj8yj5@(s8!4+970$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'https://the-sock-customizer.herokuapp.com/']
 
 
 # Application definition

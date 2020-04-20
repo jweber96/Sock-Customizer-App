@@ -1,0 +1,17 @@
+{
+    "name": "frontend_external",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+    },
+    "scripts": {
+      "start": "cd customizer/frontend && react-scripts start",
+      "build": "cd customizer/frontend && react-scripts build",
+      "test": "rcd customizer/frontend && react-scripts test",
+      "eject": "cd customizer/frontend && react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+  }
+  

@@ -1,6 +1,6 @@
-import React from "react"
+import React, {Component} from "react"
 import { connect } from "react-redux";
-import { Grid, IconButton, TextField, Typography } from "@material-ui/core";
+import { Grid, IconButton, TextField, Typography, FormHelperText } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { inputToeText, inputBrimText, resetAllText } from "./TextActions";
 import "typeface-roboto";
@@ -13,24 +13,38 @@ const StyledTextContainer = withStyles({
     }
 })(TextField);
 
-const text = (props) => {
-    const handleToeText = (event) => {
-        props.inputToeText(event.target.value);
-        updatePreview(true, event.target.value);
+class text extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isColors: false
+        }
     }
 
-    const handleBrimText = (event) => {
-        props.inputBrimText(event.target.value);
-        updatePreview(false, event.target.value);
+
+    handleToeText = event => {
+        this.props.inputToeText(event.target.value);
+        this.updatePreview(true, event.target.value);
+        this.showColorWarning();
     }
 
-    const handleReset = () => {
-        props.resetText();
-        updatePreview(true);
-        updatePreview(false);
+    handleBrimText = event => {
+        this.props.inputBrimText(event.target.value);
+        this.updatePreview(false, event.target.value);
+        this.showColorWarning();
     }
 
-    const updatePreview = (isToe, text) => {
+    showColorWarning = () => {
+        this.setState({isColors: this.props.primaryColorCode !== this.props.secondaryColorCode})
+    }
+
+    handleReset = () => {
+        this.props.resetText();
+        this.updatePreview(true);
+        this.updatePreview(false);
+    }
+
+    updatePreview = (isToe, text) => {
         const preview = document.getElementById("preview");
         if (preview) {
             const document = preview.contentDocument;
@@ -44,42 +58,52 @@ const text = (props) => {
         }
     }
 
-    const canShowDelete = () => {
+    canShowDelete = () => {
         return (
-            props.toeText !== null ||
-            props.brimText !== null
+            this.props.toeText !== null ||
+            this.props.brimText !== null
         );
     }
 
-    return (
-        <React.Fragment>
-            <Grid container direction="column" justify="center" alignItems="center">
-                <Typography variant="h5">Add Text</Typography>
-                <StyledTextContainer inputProps={{ maxLength: 14 }} label="Brim Text" variant="outlined" value={props.brimText || ""} onChange={handleBrimText} />
-                <StyledTextContainer inputProps={{ maxLength: 14 }} label="Toe Text" variant="outlined" value={props.toeText || ""} onChange={handleToeText} />
-                <Grid item>
-                    {
-                        !canShowDelete()
-                            ? (
-                                <IconButton disabled>
-                                    <DeleteIcon fontSize="large" />
-                                </IconButton>
-                            ) : (
-                                <IconButton onClick={handleReset}>
-                                    <DeleteIcon fontSize="large" />
-                                </IconButton>
-                            )
-                    }
+    componentDidMount(){
+        this.showColorWarning()
+    };
+
+    render() {
+        const { isColors } = this.state;
+        return (
+            <React.Fragment>
+                <Grid container direction="column" justify="center" alignItems="center">
+                    <Typography variant="h5">Add Text</Typography>
+                    <StyledTextContainer inputProps={{ maxLength: 14 }} label="Brim Text" variant="outlined" value={this.props.brimText || ""} onChange={this.handleBrimText} />
+                    <StyledTextContainer inputProps={{ maxLength: 14 }} label="Toe Text" variant="outlined" value={this.props.toeText || ""} onChange={this.handleToeText} />
+                    <Grid item>
+                        {
+                            !this.canShowDelete()
+                                ? (
+                                    <IconButton disabled>
+                                        <DeleteIcon fontSize="large" />
+                                    </IconButton>
+                                ) : (
+                                    <IconButton onClick={this.handleReset}>
+                                        <DeleteIcon fontSize="large" />
+                                    </IconButton>
+                                )
+                        }
+                    </Grid>
+                    {!isColors && <FormHelperText error>Text may not be visible with current color selections.</FormHelperText>}
                 </Grid>
-            </Grid>
-        </React.Fragment>
-    );
+            </React.Fragment>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
     return {
         toeText: state.text.toeText,
-        brimText: state.text.brimText
+        brimText: state.text.brimText,
+        primaryColorCode: state.colors.primaryColorCode,
+        secondaryColorCode: state.colors.secondaryColorCode,
     };
 }
 

@@ -26,7 +26,7 @@ yarn build
 
     7b. Open http://127.0.0.1:8000 and you are good to go!
 
-####FAQ
+**FAQ**
 
 **Why are the React and Django app running on the same port?**
 We chose to do that! If you want to take advantage of hot reloading, run yarn start and open localhost:3000. While running on this server, you will not be able to make any API requests.

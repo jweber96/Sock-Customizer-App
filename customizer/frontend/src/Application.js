@@ -7,7 +7,7 @@ import Body from "./layout/Body";
 import Footer from "./layout/Footer";
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 
 const application = () => {
   return (

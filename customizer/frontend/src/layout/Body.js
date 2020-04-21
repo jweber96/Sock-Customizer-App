@@ -4,7 +4,7 @@ import Cut from "../cut/Cut"
 import TabHeader from "../tabs/TabsHeader";
 import "typeface-roboto";
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
   } from "react-router-dom";

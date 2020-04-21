@@ -2,7 +2,7 @@ import React from "react"
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import "typeface-roboto";
-import { NavLink, BrowserRouter as Router, withRouter } from 'react-router-dom'
+import { NavLink, HashRouter as Router, withRouter } from 'react-router-dom'
 
 const header = (props) => {
     return (

@@ -269,7 +269,6 @@ class details extends Component {
             "secondary_color": this.props.colors.secondaryColorCode,
             "toe_primary_text": this.props.text.toeText,
             "brim_primary_text": this.props.text.brimText,
-            "logo": this.props.logo.inputLogo,
             "added_at": moment()
         }
         const res = await fetch('/api/orders/', {

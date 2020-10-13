@@ -1,0 +1,8 @@
+myvirtualenvironment/
+myvirutalenvironment/
+env/
+*.pyc
+__pycache__/
+*.sqlite3.env
+node_modules
+.DS_Store
